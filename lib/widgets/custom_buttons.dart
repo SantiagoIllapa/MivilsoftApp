@@ -8,7 +8,13 @@ class CustomIconButton extends StatelessWidget {
   String? icon;
   Widget? customIcon;
   Function? funct;
-  CustomIconButton({Key? key, this.icon, this.customIcon, required this.funct})
+  double? size;
+  CustomIconButton(
+      {Key? key,
+      this.icon,
+      this.customIcon,
+      required this.size,
+      required this.funct})
       : super(key: key);
 
   @override
@@ -25,18 +31,26 @@ class CustomIconButton extends StatelessWidget {
       iconWidget = Iconify(
         icon!,
         color: const Color(0xFF555555),
+        size: size! / 2,
       );
     }
     if (customIcon != null) {
       iconWidget = customIcon!;
     }
-    return (FloatingActionButton(
-      onPressed: () {
-        funct;
-      },
-      backgroundColor: const Color(0xffF9F9F7),
-      // elevation: 0.5,
-      child: iconWidget,
-    ));
+
+    return (Theme(
+        data: Theme.of(context).copyWith(
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+                largeSizeConstraints:
+                    BoxConstraints.tightFor(width: size, height: size))),
+        child: FloatingActionButton.large(
+          onPressed: () {
+            funct;
+          },
+          backgroundColor: const Color(0xffF9F9F7),
+
+          // elevation: 0.5,
+          child: iconWidget,
+        )));
   }
 }
