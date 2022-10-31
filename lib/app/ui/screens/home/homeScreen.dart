@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     GoogleMapController? controller;
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
         drawer: const MainMenu(),
         body: MediaQuery.of(context).orientation == Orientation.portrait
@@ -49,7 +50,8 @@ class _HomePageState extends State<HomePage> {
                   CustomSearchBar(
                       deviceHeight: deviceHeight,
                       deviceWidth: deviceWidth,
-                      mapController: controller),
+                      mapController: controller,
+                      scaffoldKey: _scaffoldKey),
                   PortraitGui(
                       screenHeight: screenHeight, screenWidth: screenWidth)
                 ],

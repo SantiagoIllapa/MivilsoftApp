@@ -23,14 +23,14 @@ class MyWidget extends StatelessWidget {
 class CustomSearchBar extends StatelessWidget {
   double? deviceHeight;
   double? deviceWidth;
-  Key? parentkey;
   GoogleMapController? mapController;
+  GlobalKey<ScaffoldState>? scaffoldKey;
   CustomSearchBar(
       {super.key,
       required this.deviceHeight,
       required this.deviceWidth,
       required this.mapController,
-      this.parentkey});
+      required this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class CustomSearchBar extends StatelessWidget {
         return Container(
           //Barra de Búsqueda
           margin:
-              const EdgeInsets.only(left: 15, right: 15, bottom: 10, top: 10),
+              const EdgeInsets.only(left: 15, right: 15, bottom: 10, top: 50),
           height: 45,
 
           alignment: Alignment.center,
@@ -56,7 +56,9 @@ class CustomSearchBar extends StatelessWidget {
             child: Row(
               children: [
                 FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    scaffoldKey!.currentState?.openDrawer();
+                  },
                   disabledElevation: 0,
                   focusElevation: 0,
                   backgroundColor: const Color(0xffF9F9F7),
