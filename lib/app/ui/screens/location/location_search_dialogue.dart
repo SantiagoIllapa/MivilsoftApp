@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 
@@ -16,8 +15,8 @@ class LocationSearchDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController _controller = TextEditingController();
     return Container(
-      margin: EdgeInsets.only(top: 150),
-      padding: EdgeInsets.all(5),
+      margin: const EdgeInsets.only(top: 150),
+      padding: const EdgeInsets.all(5),
       alignment: Alignment.topCenter,
       child: Material(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -34,8 +33,8 @@ class LocationSearchDialog extends StatelessWidget {
                     hintText: 'Buscar',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            BorderSide(style: BorderStyle.none, width: 0)),
+                        borderSide: const BorderSide(
+                            style: BorderStyle.none, width: 0)),
                     hintStyle: Theme.of(context).textTheme.headline2?.copyWith(
                           fontSize: 16,
                           color: Theme.of(context).disabledColor,
@@ -49,23 +48,19 @@ class LocationSearchDialog extends StatelessWidget {
               },
               itemBuilder: (context, Prediction suggestion) {
                 return Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Icon(Icons.location_on),
-                        Expanded(
-                            child: Text(suggestion.description!,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                selectionColor: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    ?.color))
+                        Text(suggestion.description!,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            selectionColor:
+                                Theme.of(context).textTheme.bodyText1?.color)
                       ],
                     ));
               },
               onSuggestionSelected: (Prediction suggestion) {
-                print("My location is " + suggestion.description!);
+                // print("My location is " + suggestion.description!);
                 //Get.find<LocationController>().setLocation(suggestion.placeId!, suggestion.description!, mapController);
                 Get.back();
               },

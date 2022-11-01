@@ -1,69 +1,60 @@
-import 'package:flutter/cupertino.dart';
+
+import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/Ri.dart';
 import 'package:iconify_flutter/icons/bi.dart';
 import 'package:iconify_flutter/icons/ic.dart';
-import 'package:mivilsoft_app/widgets/custom_buttons.dart';
 
 // ignore: camel_case_types, must_be_immutable
 class LandscapeGui extends StatelessWidget {
   double? screenWidth;
   double? screenHeight;
+  GlobalKey<ScaffoldState>? scaffoldKey;
   LandscapeGui(
-      {super.key, required this.screenHeight, required this.screenWidth});
+      {super.key,
+      required this.screenHeight,
+      required this.screenWidth,
+      required this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          margin: EdgeInsets.only(
-              left: screenWidth! / 15,
-              right: screenWidth! / 15,
-              top: screenHeight! / 5,
-              bottom: screenHeight! / 5),
-          alignment: Alignment.topRight,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                  padding: EdgeInsets.only(
-                      top: screenHeight! / 45, bottom: screenHeight! / 45),
-                  child: CustomIconButton(
-                    icon: Ic.round_layers,
-                    size: screenHeight! / 11,
-                    funct: () {},
-                  )), //Capas
-              Padding(
-                padding: EdgeInsets.only(
-                    top: screenHeight! / 45, bottom: screenHeight! / 45),
-                child: CustomIconButton(
-                    icon: Bi.info_lg,
-                    size: screenHeight! / 11,
-                    funct: () {}), //Información
-              )
-            ],
-          ),
+    Widget button(String icon, Function() fun) {
+      return Expanded(
+        child: IconButton(
+            onPressed: fun,
+            hoverColor: const Color(0xffF9F9F7),
+            icon: Iconify(
+              icon,
+              size: screenWidth!,
+              color: const Color(0xFF555555),
+            )),
+      );
+    }
+
+    return Stack(children: [
+      Container(
+        width: screenWidth! / 15,
+        height: screenHeight,
+        padding: EdgeInsets.symmetric(vertical: screenWidth! / 35),
+
+        // EdgeInsets.only(top: screenWidth! / 35, bottom: screenWidth! / 35),
+        decoration: BoxDecoration(
+            // color: const Color.fromARGB(255, 37, 37, 0),
+            color: const Color(0xffF9F9F7),
+            border: Border.all(color: const Color.fromARGB(10, 0, 0, 0))),
+        child: Column(
+          children: [
+            button(Ic.round_menu, () {
+              scaffoldKey!.currentState?.openDrawer();
+            }),
+            button(Ri.search_line, () {}),
+            button(Ic.round_layers, () {}),
+            button(Bi.info_lg, () {}),
+            button(Ic.round_gps_fixed, () {}),
+            button(Ri.gas_station_fill, () {}),
+          ],
         ),
-        Container(
-          margin: EdgeInsets.only(
-              left: screenWidth! / 15,
-              right: screenWidth! / 15,
-              top: screenHeight! / 5,
-              bottom: screenHeight! / 20),
-          alignment: Alignment.bottomCenter,
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            CustomIconButton(
-                icon: Ri.gas_station_fill,
-                size: screenHeight! / 11,
-                funct: () {}), //Add Estación
-            CustomIconButton(
-                icon: Ic.round_gps_fixed,
-                size: screenHeight! / 11,
-                funct: () {}), //GPS
-          ]),
-        )
-      ],
-    );
+      )
+    ]);
   }
 }

@@ -17,7 +17,7 @@ class LocationController extends GetxController {
     if (text.isNotEmpty) {
       http.Response response = await getLocationData(text);
       var data = jsonDecode(response.body.toString());
-      print("my status is " + data["status"]);
+      // print("my status is " + data["status"]);
       if (data['status'] == 'OK') {
         _predicctionList = [];
         data['predictions'].forEach((prediction) =>

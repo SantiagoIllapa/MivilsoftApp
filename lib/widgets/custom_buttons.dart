@@ -9,13 +9,15 @@ class CustomIconButton extends StatelessWidget {
   Widget? customIcon;
   Function? funct;
   double? size;
-  CustomIconButton(
-      {Key? key,
-      this.icon,
-      this.customIcon,
-      required this.size,
-      required this.funct})
-      : super(key: key);
+  String? heroTag;
+  CustomIconButton({
+    Key? key,
+    this.icon,
+    this.customIcon,
+    required this.size,
+    required this.funct,
+    required this.heroTag,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class CustomIconButton extends StatelessWidget {
                 largeSizeConstraints:
                     BoxConstraints.tightFor(width: size, height: size))),
         child: FloatingActionButton.large(
+          heroTag: heroTag,
           onPressed: () {
             funct;
           },

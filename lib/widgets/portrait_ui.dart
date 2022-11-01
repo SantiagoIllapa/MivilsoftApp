@@ -32,14 +32,17 @@ class PortraitGui extends StatelessWidget {
                     icon: Ic.round_layers,
                     size: screenHeight! / 13,
                     funct: () {},
+                    heroTag: 'Capas',
                   )), //Capas
               Padding(
                 padding: EdgeInsets.only(
                     top: screenHeight! / 45, bottom: screenHeight! / 45),
                 child: CustomIconButton(
-                    icon: Bi.info_lg,
-                    size: screenHeight! / 13,
-                    funct: () {}), //Información
+                  icon: Bi.info_lg,
+                  size: screenHeight! / 13,
+                  funct: () {},
+                  heroTag: "Info",
+                ), //Información
               )
             ],
           ),
@@ -54,13 +57,17 @@ class PortraitGui extends StatelessWidget {
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             CustomIconButton(
-                icon: Ri.gas_station_fill,
-                size: screenHeight! / 13,
-                funct: () {}), //Add Estación
+              icon: Ri.gas_station_fill,
+              size: screenHeight! / 13,
+              funct: () {},
+              heroTag: 'AddEstacion',
+            ), //Add Estación
             CustomIconButton(
-                icon: Ic.round_gps_fixed,
-                size: screenHeight! / 13,
-                funct: () {}), //GPS
+              icon: Ic.round_gps_fixed,
+              size: screenHeight! / 13,
+              funct: () {},
+              heroTag: 'Gps',
+            ), //GPS
           ]),
         )
       ],

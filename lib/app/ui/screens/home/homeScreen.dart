@@ -1,8 +1,7 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:mivilsoft_app/widgets/SearchBar.dart';
-import 'package:mivilsoft_app/widgets/googleMap.dart';
+import 'package:mivilsoft_app/widgets/searchBar.dart';
 import 'package:mivilsoft_app/widgets/landscape_ui.dart';
 import 'package:mivilsoft_app/widgets/main_menu.dart';
 import 'package:mivilsoft_app/widgets/portrait_ui.dart';
@@ -27,7 +26,17 @@ class _HomePageState extends State<HomePage> {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
     GoogleMapController? controller;
-
+    Widget map = GoogleMap(
+      onMapCreated: (GoogleMapController contro) {
+        controller = contro;
+      },
+      initialCameraPosition: _initialCameraPos,
+      zoomControlsEnabled: false,
+      compassEnabled: false,
+      mapType: MapType.normal,
+      myLocationEnabled: true,
+      myLocationButtonEnabled: false,
+    );
     return Scaffold(
         resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
@@ -35,17 +44,7 @@ class _HomePageState extends State<HomePage> {
         body: MediaQuery.of(context).orientation == Orientation.portrait
             ? Stack(
                 children: [
-                  GoogleMap(
-                    onMapCreated: (GoogleMapController contro) {
-                      controller = contro;
-                    },
-                    initialCameraPosition: _initialCameraPos,
-                    zoomControlsEnabled: false,
-                    compassEnabled: false,
-                    mapType: MapType.normal,
-                    myLocationEnabled: true,
-                    myLocationButtonEnabled: false,
-                  ),
+                  map,
                   //Text('$screenWidth,$screenHeight'),
                   CustomSearchBar(
                       deviceHeight: deviceHeight,
@@ -58,9 +57,11 @@ class _HomePageState extends State<HomePage> {
               )
             : Stack(
                 children: [
-                  // const MivilMap(),
+                  map,
                   LandscapeGui(
-                      screenHeight: screenHeight, screenWidth: screenWidth)
+                      screenHeight: screenHeight,
+                      screenWidth: screenWidth,
+                      scaffoldKey: _scaffoldKey)
                 ],
               ));
   }

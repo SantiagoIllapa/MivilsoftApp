@@ -34,9 +34,9 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController searchController = TextEditingController();
-    String searchText = "";
-    String _selectedMenu = '';
+    // TextEditingController searchController = TextEditingController();
+    // String searchText = "";
+    // String _selectedMenu = '';
 
     return GetBuilder<LocationController>(
       builder: (locationController) {
@@ -82,18 +82,17 @@ class CustomSearchBar extends StatelessWidget {
                         },
                         child: Container(
                           height: 50,
-                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
                           decoration:
-                              BoxDecoration(color: Colors.deepOrangeAccent),
-                          child: Expanded(
-                              child: Text(
+                              const BoxDecoration(color: Colors.deepOrangeAccent),
+                          child: Text(
                             '${locationController.pickPlaceMark.name ?? ''}'
                             '${locationController.pickPlaceMark.locality ?? ''}'
                             '${locationController.pickPlaceMark.postalCode ?? ''}'
                             '${locationController.pickPlaceMark.country ?? ''}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                          )),
+                          ),
                         ),
                       )),
                 ),
