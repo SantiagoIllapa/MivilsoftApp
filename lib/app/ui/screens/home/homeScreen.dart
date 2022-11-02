@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
-        drawer: const MainMenu(),
+        drawer: MainMenu(screenWidth: screenWidth),
         body: MediaQuery.of(context).orientation == Orientation.portrait
             ? Stack(
                 children: [
