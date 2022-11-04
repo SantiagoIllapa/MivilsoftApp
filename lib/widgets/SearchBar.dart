@@ -37,70 +37,54 @@ class CustomSearchBar extends StatelessWidget {
     // TextEditingController searchController = TextEditingController();
     // String searchText = "";
     // String _selectedMenu = '';
-
-    return GetBuilder<LocationController>(
-      builder: (locationController) {
-        return Container(
-          //Barra de Búsqueda
-          margin:
-              const EdgeInsets.only(left: 15, right: 15, bottom: 10, top: 50),
-          height: 45,
-
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              color: const Color(0xffF9F9F7),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color.fromARGB(10, 0, 0, 0))),
-          child: Container(
-            margin: const EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
-            child: Row(
-              children: [
-                FloatingActionButton(
-                  onPressed: () {
-                    scaffoldKey!.currentState?.openDrawer();
-                  },
-                  disabledElevation: 0,
-                  focusElevation: 0,
-                  backgroundColor: const Color(0xffF9F9F7),
-                  foregroundColor: const Color(0xffF9F9F7),
-                  focusColor: const Color(0xffF9F9F7),
-                  hoverColor: const Color(0xffF9F9F7),
-                  elevation: 0,
-                  hoverElevation: 0,
-                  child: const Iconify(
-                    Ic.round_menu,
-                    color: Colors.black,
-                  ),
+    Widget menuButton = Container();
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      menuButton = FloatingActionButton(
+        onPressed: () {
+          scaffoldKey!.currentState?.openDrawer();
+        },
+        disabledElevation: 0,
+        focusElevation: 0,
+        backgroundColor: const Color(0xffF9F9F7),
+        foregroundColor: const Color(0xffF9F9F7),
+        focusColor: const Color(0xffF9F9F7),
+        hoverColor: const Color(0xffF9F9F7),
+        elevation: 0,
+        hoverElevation: 0,
+        child: const Iconify(
+          Ic.round_menu,
+          color: Color(0xFF555555),
+        ),
+      );
+    }
+    return Container(
+      //Barra de Búsqueda
+      margin: EdgeInsets.only(
+          left: 15, right: 15, bottom: 10, top: deviceHeight! / 25),
+      height: deviceHeight! / 15,
+      padding: EdgeInsets.symmetric(vertical: deviceHeight! / 100),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          color: const Color(0xffF9F9F7),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: const Color.fromARGB(10, 0, 0, 0))),
+      child: Row(
+        children: [
+          menuButton,
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                onTap: () {},
+                style: TextStyle(fontSize: deviceHeight! / 50),
+                decoration: const InputDecoration(
+                  hintText: "Buscar",
                 ),
-                Flexible(
-                  child: Container(
-                      margin: const EdgeInsets.only(right: 20, left: 20),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.dialog(LocationSearchDialog(
-                              mapController: mapController));
-                        },
-                        child: Container(
-                          height: 50,
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          decoration:
-                              const BoxDecoration(color: Colors.deepOrangeAccent),
-                          child: Text(
-                            '${locationController.pickPlaceMark.name ?? ''}'
-                            '${locationController.pickPlaceMark.locality ?? ''}'
-                            '${locationController.pickPlaceMark.postalCode ?? ''}'
-                            '${locationController.pickPlaceMark.country ?? ''}',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      )),
-                ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+          )
+        ],
+      ),
     );
   }
 }

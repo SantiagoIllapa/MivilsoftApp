@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/Ri.dart';
 import 'package:iconify_flutter/icons/bi.dart';
@@ -9,11 +9,13 @@ import 'package:iconify_flutter/icons/ic.dart';
 class LandscapeGui extends StatelessWidget {
   double? screenWidth;
   double? screenHeight;
+  GoogleMapController? mapControler;
   GlobalKey<ScaffoldState>? scaffoldKey;
   LandscapeGui(
       {super.key,
       required this.screenHeight,
       required this.screenWidth,
+      required this.mapControler,
       required this.scaffoldKey});
 
   @override

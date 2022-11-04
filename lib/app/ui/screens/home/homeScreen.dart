@@ -37,6 +37,11 @@ class _HomePageState extends State<HomePage> {
       myLocationEnabled: true,
       myLocationButtonEnabled: false,
     );
+    Widget searchBar = CustomSearchBar(
+        deviceHeight: screenHeight,
+        deviceWidth: screenWidth,
+        mapController: controller,
+        scaffoldKey: _scaffoldKey);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
@@ -44,24 +49,37 @@ class _HomePageState extends State<HomePage> {
         body: MediaQuery.of(context).orientation == Orientation.portrait
             ? Stack(
                 children: [
-                  map,
-                  //Text('$screenWidth,$screenHeight'),
-                  CustomSearchBar(
-                      deviceHeight: deviceHeight,
-                      deviceWidth: deviceWidth,
-                      mapController: controller,
-                      scaffoldKey: _scaffoldKey),
-                  PortraitGui(
-                      screenHeight: screenHeight, screenWidth: screenWidth)
+                  // map,
+                  Column(
+                    children: [
+                      searchBar,
+                      //Text('$screenWidth,$screenHeight'),
+                      Expanded(
+                        child: PortraitGui(
+                          screenHeight: screenHeight,
+                          screenWidth: screenWidth,
+                          mapControler: controller,
+                          scaffoldKey: _scaffoldKey,
+                        ),
+                      )
+                    ],
+                  )
                 ],
               )
             : Stack(
                 children: [
                   map,
-                  LandscapeGui(
-                      screenHeight: screenHeight,
-                      screenWidth: screenWidth,
-                      scaffoldKey: _scaffoldKey)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LandscapeGui(
+                          screenHeight: screenHeight,
+                          screenWidth: screenWidth,
+                          mapControler: controller,
+                          scaffoldKey: _scaffoldKey),
+                      Expanded(child: searchBar),
+                    ],
+                  )
                 ],
               ));
   }

@@ -15,14 +15,15 @@ class LocationController extends GetxController {
   Future<List<Prediction>> searchLocation(
       BuildContext context, String text) async {
     if (text.isNotEmpty) {
+      print("buscando..");
       http.Response response = await getLocationData(text);
       var data = jsonDecode(response.body.toString());
-      // print("my status is " + data["status"]);
+      print("my status is " + data["status"]);
       if (data['status'] == 'OK') {
         _predicctionList = [];
         data['predictions'].forEach((prediction) =>
             _predicctionList.add(Prediction.fromJson(prediction)));
-      } else {}
+      }
     }
     return _predicctionList;
   }

@@ -12,13 +12,12 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     double menuWidth = screenWidth! * 0.7;
     double acountTextSize = screenWidth! / 25;
+    double textSize = screenWidth! / 35;
     if (MediaQuery.of(context).orientation == Orientation.landscape) {
       menuWidth = screenWidth! * 0.2;
-      if (acountTextSize > menuWidth) {
-        print("hola");
-        menuWidth = acountTextSize + 5;
-      }
+
       acountTextSize = screenWidth! / 70;
+      textSize = screenWidth! / 85;
     }
     return Drawer(
       width: menuWidth,
@@ -46,8 +45,8 @@ class MainMenu extends StatelessWidget {
             ),
             title: Text(
               "Favoritos",
-              style: TextStyle(
-                  color: const Color(0xFF555555), fontSize: acountTextSize),
+              style:
+                  TextStyle(color: const Color(0xFF555555), fontSize: textSize),
             ),
           ),
           ListTile(
@@ -58,8 +57,8 @@ class MainMenu extends StatelessWidget {
             ),
             title: Text(
               "Preguntas frecuentes",
-              style: TextStyle(
-                  color: const Color(0xFF555555), fontSize: acountTextSize),
+              style:
+                  TextStyle(color: const Color(0xFF555555), fontSize: textSize),
             ),
           ),
           ListTile(
@@ -70,8 +69,8 @@ class MainMenu extends StatelessWidget {
             ),
             title: Text(
               "Terminos y condiciones",
-              style: TextStyle(
-                  color: const Color(0xFF555555), fontSize: acountTextSize),
+              style:
+                  TextStyle(color: const Color(0xFF555555), fontSize: textSize),
             ),
           ),
           ListTile(
@@ -82,8 +81,8 @@ class MainMenu extends StatelessWidget {
             ),
             title: Text(
               "Contactar",
-              style: TextStyle(
-                  color: const Color(0xFF555555), fontSize: acountTextSize),
+              style:
+                  TextStyle(color: const Color(0xFF555555), fontSize: textSize),
             ),
           ),
           ListTile(
@@ -94,8 +93,8 @@ class MainMenu extends StatelessWidget {
             ),
             title: Text(
               "Configuración",
-              style: TextStyle(
-                  color: const Color(0xFF555555), fontSize: acountTextSize),
+              style:
+                  TextStyle(color: const Color(0xFF555555), fontSize: textSize),
             ),
           ),
         ]),
