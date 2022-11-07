@@ -14,16 +14,17 @@ class MainMenu extends StatelessWidget {
     double acountTextSize = screenWidth! / 25;
     double textSize = screenWidth! / 35;
     if (MediaQuery.of(context).orientation == Orientation.landscape) {
-      menuWidth = screenWidth! * 0.2;
+      menuWidth = screenWidth! * 0.3;
 
       acountTextSize = screenWidth! / 70;
       textSize = screenWidth! / 85;
     }
     return Drawer(
+      elevation: 2,
       width: menuWidth,
       child: Container(
         padding: const EdgeInsets.all(10),
-        child: Wrap(runSpacing: 15, children: [
+        child: Column(children: [
           ListTile(
             leading: const Iconify(
               Ri.account_circle_fill,
@@ -37,66 +38,72 @@ class MainMenu extends StatelessWidget {
             ),
           ),
           const Divider(color: Color(0xFF555555)),
-          ListTile(
-            leading: const Iconify(
-              Ri.star_fill,
-              size: 24,
-              color: Color(0xFF555555),
+          Expanded(
+            child: ListView(
+              children: [
+                ListTile(
+                  leading: const Iconify(
+                    Ri.star_fill,
+                    size: 24,
+                    color: Color(0xFF555555),
+                  ),
+                  title: Text(
+                    "Favoritos",
+                    style: TextStyle(
+                        color: const Color(0xFF555555), fontSize: textSize),
+                  ),
+                ),
+                ListTile(
+                  leading: const Iconify(
+                    Ri.question_fill,
+                    size: 24,
+                    color: Color(0xFF555555),
+                  ),
+                  title: Text(
+                    "Preguntas frecuentes",
+                    style: TextStyle(
+                        color: const Color(0xFF555555), fontSize: textSize),
+                  ),
+                ),
+                ListTile(
+                  leading: const Iconify(
+                    Ri.file_list_3_fill,
+                    size: 24,
+                    color: Color(0xFF555555),
+                  ),
+                  title: Text(
+                    "Terminos y condiciones",
+                    style: TextStyle(
+                        color: const Color(0xFF555555), fontSize: textSize),
+                  ),
+                ),
+                ListTile(
+                  leading: const Iconify(
+                    Ri.phone_fill,
+                    size: 24,
+                    color: Color(0xFF555555),
+                  ),
+                  title: Text(
+                    "Contactar",
+                    style: TextStyle(
+                        color: const Color(0xFF555555), fontSize: textSize),
+                  ),
+                ),
+                ListTile(
+                  leading: const Iconify(
+                    Uil.cog,
+                    size: 24,
+                    color: Color(0xFF555555),
+                  ),
+                  title: Text(
+                    "Configuración",
+                    style: TextStyle(
+                        color: const Color(0xFF555555), fontSize: textSize),
+                  ),
+                ),
+              ],
             ),
-            title: Text(
-              "Favoritos",
-              style:
-                  TextStyle(color: const Color(0xFF555555), fontSize: textSize),
-            ),
-          ),
-          ListTile(
-            leading: const Iconify(
-              Ri.question_fill,
-              size: 24,
-              color: Color(0xFF555555),
-            ),
-            title: Text(
-              "Preguntas frecuentes",
-              style:
-                  TextStyle(color: const Color(0xFF555555), fontSize: textSize),
-            ),
-          ),
-          ListTile(
-            leading: const Iconify(
-              Ri.file_list_3_fill,
-              size: 24,
-              color: Color(0xFF555555),
-            ),
-            title: Text(
-              "Terminos y condiciones",
-              style:
-                  TextStyle(color: const Color(0xFF555555), fontSize: textSize),
-            ),
-          ),
-          ListTile(
-            leading: const Iconify(
-              Ri.phone_fill,
-              size: 24,
-              color: Color(0xFF555555),
-            ),
-            title: Text(
-              "Contactar",
-              style:
-                  TextStyle(color: const Color(0xFF555555), fontSize: textSize),
-            ),
-          ),
-          ListTile(
-            leading: const Iconify(
-              Uil.cog,
-              size: 24,
-              color: Color(0xFF555555),
-            ),
-            title: Text(
-              "Configuración",
-              style:
-                  TextStyle(color: const Color(0xFF555555), fontSize: textSize),
-            ),
-          ),
+          )
         ]),
       ),
     );
