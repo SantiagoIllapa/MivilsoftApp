@@ -5,32 +5,28 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/Ri.dart';
 import 'package:iconify_flutter/icons/bi.dart';
 import 'package:iconify_flutter/icons/ic.dart';
-import 'package:mivilsoft_app/app/ui/screens/home/homeScreen.dart';
+import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
 import 'package:mivilsoft_app/widgets/custom_buttons.dart';
-import 'package:mivilsoft_app/widgets/searchBar.dart';
 
 // ignore: camel_case_types, must_be_immutable
 
 class PortraitGui extends StatelessWidget {
-  List<String> popList = ["Satelital", "normal"];
-  double? screenWidth;
-  double? screenHeight;
-  GoogleMapController? mapControler;
+  HomeController? mapControler;
   GlobalKey<ScaffoldState>? scaffoldKey;
-  MapOptions? mapOpt;
+  Function? change;
   PortraitGui({
     super.key,
-    required this.screenHeight,
-    required this.screenWidth,
     required this.mapControler,
     required this.scaffoldKey,
-    required this.mapOpt,
+    required this.change,
   });
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Padding(
-      padding: EdgeInsets.all(screenWidth! / 15),
+      padding: EdgeInsets.all(screenWidth / 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -41,16 +37,16 @@ class PortraitGui extends StatelessWidget {
               children: [
                 Padding(
                     padding: EdgeInsets.only(
-                        top: screenHeight! / 45, bottom: screenHeight! / 45),
+                        top: screenHeight / 45, bottom: screenHeight / 45),
                     child: PopupMenuButton(
-                      child: const Iconify(Ic.round_layers),
                       itemBuilder: (context) {
-                        return popList
+                        return mapControler!.typeMapList.keys
+                            .toList()
                             .map((e) => PopupMenuItem(
                                 value: e,
                                 child: TextButton(
                                   onPressed: () {
-                                    scaffoldKey!.currentState!.setState(() {});
+                                    mapControler?.changeMapType(e);
                                   },
                                   child: Text(e),
                                 )))
@@ -59,7 +55,7 @@ class PortraitGui extends StatelessWidget {
                     )
                     // CustomIconButton(
                     //   icon: Ic.round_layers,
-                    //   size: screenHeight! / 13,
+                    //   size: screenHeight / 13,
                     //   funct: () {
                     //     print("hola");
                     //   },
@@ -68,10 +64,10 @@ class PortraitGui extends StatelessWidget {
                     ), //Capas
                 Padding(
                   padding: EdgeInsets.only(
-                      top: screenHeight! / 45, bottom: screenHeight! / 45),
+                      top: screenHeight / 45, bottom: screenHeight / 45),
                   child: CustomIconButton(
                     icon: Bi.info_lg,
-                    size: screenHeight! / 13,
+                    size: screenHeight / 13,
                     funct: () {},
                     heroTag: "Info",
                   ), //Información
@@ -81,23 +77,23 @@ class PortraitGui extends StatelessWidget {
           ),
           Container(
             // margin: EdgeInsets.only(
-            //     left: screenWidth! / 15,
-            //     right: screenWidth! / 15,
-            //     top: screenHeight! / 5,
-            //     bottom: screenHeight! / 20),
+            //     left: screenWidth / 15,
+            //     right: screenWidth / 15,
+            //     top: screenHeight / 5,
+            //     bottom: screenHeight / 20),
             alignment: Alignment.bottomCenter,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomIconButton(
                     icon: Ri.gas_station_fill,
-                    size: screenHeight! / 13,
+                    size: screenHeight / 13,
                     funct: () {},
                     heroTag: 'AddEstacion',
                   ), //Add Estación
                   CustomIconButton(
                     icon: Ic.round_gps_fixed,
-                    size: screenHeight! / 13,
+                    size: screenHeight / 13,
                     funct: () {},
                     heroTag: 'Gps',
                   ), //GPS
