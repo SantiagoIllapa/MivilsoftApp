@@ -40,20 +40,23 @@ class CustomIconButton extends StatelessWidget {
       iconWidget = customIcon!;
     }
 
-    return (Theme(
-        data: Theme.of(context).copyWith(
-            floatingActionButtonTheme: FloatingActionButtonThemeData(
-                largeSizeConstraints:
-                    BoxConstraints.tightFor(width: size, height: size))),
-        child: FloatingActionButton.large(
-          heroTag: heroTag,
-          onPressed: () {
-            funct;
-          },
-          backgroundColor: const Color(0xffF9F9F7),
-
-          // elevation: 0.5,
-          child: iconWidget,
-        )));
+    return (Container(
+      width: size!,
+      height: size!,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(size!),
+          color: const Color(0xffF9F9F7),
+          border: Border.all(color: const Color.fromARGB(80, 0, 0, 0))),
+      child: IconButton(
+        icon: iconWidget,
+        onPressed: () {
+          funct!();
+        },
+      ),
+    ));
   }
 }
+// data: Theme.of(context).copyWith(
+//             floatingActionButtonTheme: FloatingActionButtonThemeData(
+//                 largeSizeConstraints:
+//                     BoxConstraints.tightFor(width: size, height: size))),

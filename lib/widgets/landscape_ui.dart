@@ -5,6 +5,8 @@ import 'package:iconify_flutter/icons/bi.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
 
+import '../app/ui/screens/information/informationScreen.dart';
+
 // ignore: camel_case_types, must_be_immutable
 class LandscapeGui extends StatelessWidget {
   HomeController? mapControler;
@@ -23,7 +25,6 @@ class LandscapeGui extends StatelessWidget {
             hoverColor: const Color(0xffF9F9F7),
             icon: Iconify(
               icon,
-              size: screenWidth,
               color: const Color(0xFF555555),
             )),
       );
@@ -46,20 +47,37 @@ class LandscapeGui extends StatelessWidget {
               scaffoldKey!.currentState?.openDrawer();
             }),
             button(Ri.search_line, () {}),
-            PopupMenuButton(itemBuilder: (context) {
-              return mapControler!.typeMapList.keys
-                  .toList()
-                  .map((e) => PopupMenuItem(
-                      value: e,
-                      child: TextButton(
-                        onPressed: () {
-                          mapControler?.changeMapType(e);
-                        },
-                        child: Text(e),
-                      )))
-                  .toList();
+            Expanded(
+              child: IconButton(
+                hoverColor: const Color(0xffF9F9F7),
+                icon: PopupMenuButton(
+                    child: const Iconify(
+                      Ic.round_layers,
+                      color: Color(0xFF555555),
+                      //size: screenWidth,
+                    ),
+                    itemBuilder: (context) {
+                      return mapControler!.typeMapList.keys
+                          .toList()
+                          .map((e) => PopupMenuItem(
+                              value: e,
+                              child: TextButton(
+                                onPressed: () {
+                                  mapControler?.changeMapType(e);
+                                },
+                                child: Text(e),
+                              )))
+                          .toList();
+                    }),
+                onPressed: () {},
+              ),
+            ),
+            button(Bi.info_lg, () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const InformationScreen()));
             }),
-            button(Bi.info_lg, () {}),
             button(Ic.round_gps_fixed, () {}),
             button(Ri.gas_station_fill, () {}),
           ],

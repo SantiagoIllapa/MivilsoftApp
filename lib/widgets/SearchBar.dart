@@ -2,13 +2,9 @@
 // ignore_for_file: must_be_immutable, file_names, duplicate_ignore
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
-import 'package:mivilsoft_app/app/ui/screens/location/location_controller.dart';
-import 'package:mivilsoft_app/app/ui/screens/location/location_search_dialogue.dart';
 
 enum Menu { itemOne, itemTwo, itemThree, itemFour }
 
@@ -33,33 +29,45 @@ class CustomSearchBar extends StatelessWidget {
     // String searchText = "";
     // String _selectedMenu = '';
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     Widget menuButton = Container();
-    if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      menuButton = FloatingActionButton(
-        onPressed: () {
-          scaffoldKey!.currentState?.openDrawer();
-        },
-        disabledElevation: 0,
-        focusElevation: 0,
-        backgroundColor: const Color(0xffF9F9F7),
-        foregroundColor: const Color(0xffF9F9F7),
-        focusColor: const Color(0xffF9F9F7),
-        hoverColor: const Color(0xffF9F9F7),
-        elevation: 0,
-        hoverElevation: 0,
+    Widget filterButton = IconButton(
+      icon: PopupMenuButton(
         child: const Iconify(
-          Ic.round_menu,
+          Ic.twotone_search,
           color: Color(0xFF555555),
         ),
-      );
+        itemBuilder: (context) {
+          return mapController!.typeMapList.keys
+              .toList()
+              .map((e) => PopupMenuItem(
+                  value: e,
+                  child: TextButton(
+                    onPressed: () {
+                      mapController?.changeMapType(e);
+                    },
+                    child: Text(e),
+                  )))
+              .toList();
+        },
+      ),
+      onPressed: () {},
+    );
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      menuButton = IconButton(
+          onPressed: () {
+            scaffoldKey!.currentState?.openDrawer();
+          },
+          icon: const Iconify(
+            Ic.round_menu,
+            color: Color(0xFF555555),
+          ));
     }
     return Container(
       //Barra de Búsqueda
       margin: EdgeInsets.only(
-          left: 15, right: 15, bottom: 10, top: screenHeight / 25),
+          left: 15, right: 15, bottom: 10, top: screenHeight / 20),
       height: screenHeight / 15,
-      padding: EdgeInsets.symmetric(vertical: screenHeight / 100),
+      //padding: EdgeInsets.symmetric(vertical: screenHeight / 100),
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: const Color(0xffF9F9F7),
@@ -70,7 +78,7 @@ class CustomSearchBar extends StatelessWidget {
           menuButton,
           Expanded(
             child: Container(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(bottom: 10.0),
               child: TextField(
                 onTap: () {},
                 style: TextStyle(fontSize: screenHeight / 50),
@@ -79,7 +87,8 @@ class CustomSearchBar extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+          filterButton
         ],
       ),
     );

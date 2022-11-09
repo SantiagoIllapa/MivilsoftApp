@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/Ri.dart';
@@ -40,6 +39,7 @@ class MainMenu extends StatelessWidget {
               style: TextStyle(
                   color: const Color(0xFF555555), fontSize: acountTextSize),
             ),
+            onTap: () {},
           ),
           const Divider(color: Color(0xFF555555)),
           Expanded(
@@ -56,6 +56,7 @@ class MainMenu extends StatelessWidget {
                     style: TextStyle(
                         color: const Color(0xFF555555), fontSize: textSize),
                   ),
+                  onTap: () {},
                 ),
                 ListTile(
                   leading: const Iconify(
@@ -68,6 +69,7 @@ class MainMenu extends StatelessWidget {
                     style: TextStyle(
                         color: const Color(0xFF555555), fontSize: textSize),
                   ),
+                  onTap: () {},
                 ),
                 ListTile(
                   leading: const Iconify(
@@ -80,6 +82,7 @@ class MainMenu extends StatelessWidget {
                     style: TextStyle(
                         color: const Color(0xFF555555), fontSize: textSize),
                   ),
+                  onTap: () {},
                 ),
                 ListTile(
                   leading: const Iconify(
@@ -92,6 +95,7 @@ class MainMenu extends StatelessWidget {
                     style: TextStyle(
                         color: const Color(0xFF555555), fontSize: textSize),
                   ),
+                  onTap: () {},
                 ),
                 ListTile(
                   leading: const Iconify(
@@ -104,6 +108,7 @@ class MainMenu extends StatelessWidget {
                     style: TextStyle(
                         color: const Color(0xFF555555), fontSize: textSize),
                   ),
+                  onTap: () {},
                 ),
               ],
             ),

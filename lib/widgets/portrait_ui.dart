@@ -1,15 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/Ri.dart';
 import 'package:iconify_flutter/icons/bi.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
+import 'package:mivilsoft_app/app/ui/screens/information/informationScreen.dart';
 import 'package:mivilsoft_app/widgets/custom_buttons.dart';
+
+import '../app/ui/routes/routes.dart';
 
 // ignore: camel_case_types, must_be_immutable
 
+// ignore: must_be_immutable
 class PortraitGui extends StatelessWidget {
   HomeController? mapControler;
   GlobalKey<ScaffoldState>? scaffoldKey;
@@ -38,37 +40,49 @@ class PortraitGui extends StatelessWidget {
                 Padding(
                     padding: EdgeInsets.only(
                         top: screenHeight / 45, bottom: screenHeight / 45),
-                    child: PopupMenuButton(
-                      itemBuilder: (context) {
-                        return mapControler!.typeMapList.keys
-                            .toList()
-                            .map((e) => PopupMenuItem(
-                                value: e,
-                                child: TextButton(
-                                  onPressed: () {
-                                    mapControler?.changeMapType(e);
-                                  },
-                                  child: Text(e),
-                                )))
-                            .toList();
-                      },
-                    )
-                    // CustomIconButton(
-                    //   icon: Ic.round_layers,
-                    //   size: screenHeight / 13,
-                    //   funct: () {
-                    //     print("hola");
-                    //   },
-                    //   heroTag: 'Capas',
-                    // )
-                    ), //Capas
+                    child: Container(
+                      width: screenHeight / 15,
+                      height: screenHeight / 15,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(screenHeight),
+                          color: const Color(0xffF9F9F7),
+                          border: Border.all(
+                              color: const Color.fromARGB(80, 0, 0, 0))),
+                      child: IconButton(
+                        icon: PopupMenuButton(
+                          child: const Iconify(
+                            Ic.round_layers,
+                            color: Color(0xFF555555),
+                          ),
+                          itemBuilder: (context) {
+                            return mapControler!.typeMapList.keys
+                                .toList()
+                                .map((e) => PopupMenuItem(
+                                    value: e,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        mapControler?.changeMapType(e);
+                                      },
+                                      child: Text(e),
+                                    )))
+                                .toList();
+                          },
+                        ),
+                        onPressed: () {},
+                      ),
+                    )),
                 Padding(
                   padding: EdgeInsets.only(
                       top: screenHeight / 45, bottom: screenHeight / 45),
                   child: CustomIconButton(
                     icon: Bi.info_lg,
-                    size: screenHeight / 13,
-                    funct: () {},
+                    size: screenHeight / 15,
+                    funct: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const InformationScreen()));
+                    },
                     heroTag: "Info",
                   ), //Información
                 )
@@ -87,13 +101,13 @@ class PortraitGui extends StatelessWidget {
                 children: [
                   CustomIconButton(
                     icon: Ri.gas_station_fill,
-                    size: screenHeight / 13,
+                    size: screenHeight / 15,
                     funct: () {},
                     heroTag: 'AddEstacion',
                   ), //Add Estación
                   CustomIconButton(
                     icon: Ic.round_gps_fixed,
-                    size: screenHeight / 13,
+                    size: screenHeight / 15,
                     funct: () {},
                     heroTag: 'Gps',
                   ), //GPS
