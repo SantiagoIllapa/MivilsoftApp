@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/Ri.dart';
 import 'package:iconify_flutter/icons/uil.dart';
+import 'package:mivilsoft_app/utils/constants.dart';
 
 // ignore: must_be_immutable
 class MainMenu extends StatelessWidget {
-  const MainMenu({super.key});
+  MainMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,95 +22,57 @@ class MainMenu extends StatelessWidget {
       textSize = screenWidth / 85;
       menuPaddingTop = screenHeight * 0.10;
     }
+    Widget menuItem(String titleText, String icon, Function func) {
+      return ListTile(
+        leading: Iconify(
+          icon,
+          size: 24,
+          color: ColorConstant.white,
+        ),
+        title: Text(
+          titleText,
+          style: TextStyle(
+              color: ColorConstant.white,
+              fontSize: textSize,
+              fontFamily: "Roboto"),
+        ),
+        onTap: () {
+          func();
+        },
+      );
+    }
 
     return Drawer(
       elevation: 2,
       width: menuWidth,
+      backgroundColor: ColorConstant.appBackColor,
       child: Container(
         padding: EdgeInsets.only(top: menuPaddingTop),
         child: Column(children: [
           ListTile(
-            leading: const Iconify(
+            leading: Iconify(
               Ri.account_circle_fill,
               size: 50,
-              color: Color(0xFF555555),
+              color: ColorConstant.white,
             ),
             title: Text(
               "Perfil",
               style: TextStyle(
-                  color: const Color(0xFF555555), fontSize: acountTextSize),
+                  color: ColorConstant.white,
+                  fontSize: acountTextSize,
+                  fontFamily: "Roboto"),
             ),
             onTap: () {},
           ),
-          const Divider(color: Color(0xFF555555)),
+          Divider(color: ColorConstant.white),
           Expanded(
             child: ListView(
               children: [
-                ListTile(
-                  leading: const Iconify(
-                    Ri.star_fill,
-                    size: 24,
-                    color: Color(0xFF555555),
-                  ),
-                  title: Text(
-                    "Favoritos",
-                    style: TextStyle(
-                        color: const Color(0xFF555555), fontSize: textSize),
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: const Iconify(
-                    Ri.question_fill,
-                    size: 24,
-                    color: Color(0xFF555555),
-                  ),
-                  title: Text(
-                    "Preguntas frecuentes",
-                    style: TextStyle(
-                        color: const Color(0xFF555555), fontSize: textSize),
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: const Iconify(
-                    Ri.file_list_3_fill,
-                    size: 24,
-                    color: Color(0xFF555555),
-                  ),
-                  title: Text(
-                    "Terminos y condiciones",
-                    style: TextStyle(
-                        color: const Color(0xFF555555), fontSize: textSize),
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: const Iconify(
-                    Ri.phone_fill,
-                    size: 24,
-                    color: Color(0xFF555555),
-                  ),
-                  title: Text(
-                    "Contactar",
-                    style: TextStyle(
-                        color: const Color(0xFF555555), fontSize: textSize),
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: const Iconify(
-                    Uil.cog,
-                    size: 24,
-                    color: Color(0xFF555555),
-                  ),
-                  title: Text(
-                    "Configuración",
-                    style: TextStyle(
-                        color: const Color(0xFF555555), fontSize: textSize),
-                  ),
-                  onTap: () {},
-                ),
+                menuItem("Favoritos", Ri.star_fill, () {}),
+                menuItem("Preguntas frecuentes", Ri.question_fill, () {}),
+                menuItem("Terminos y condiciones", Ri.file_list_3_fill, () {}),
+                menuItem("Contactar", Ri.phone_fill, () {}),
+                menuItem("Configuración", Ri.settings_3_fill, () {}),
               ],
             ),
           )

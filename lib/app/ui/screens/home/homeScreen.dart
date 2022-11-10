@@ -25,6 +25,7 @@ class HomePage extends StatelessWidget {
           myLocationEnabled: false,
           myLocationButtonEnabled: false,
           markers: controller.markers,
+          mapToolbarEnabled: false,
           onTap: controller.onTap);
     }
 
@@ -38,7 +39,7 @@ class HomePage extends StatelessWidget {
         child: Scaffold(
             resizeToAvoidBottomInset: false,
             key: _scaffoldKey,
-            drawer: const MainMenu(),
+            drawer: MainMenu(),
             body: Consumer<HomeController>(
               builder: (_, controller, __) => Stack(children: [
                 createMap(controller),

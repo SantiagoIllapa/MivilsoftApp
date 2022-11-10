@@ -4,6 +4,7 @@ import 'package:iconify_flutter/icons/Ri.dart';
 import 'package:iconify_flutter/icons/bi.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
+import 'package:mivilsoft_app/utils/constants.dart';
 
 import '../app/ui/screens/information/informationScreen.dart';
 
@@ -22,10 +23,10 @@ class LandscapeGui extends StatelessWidget {
       return Expanded(
         child: IconButton(
             onPressed: fun,
-            hoverColor: const Color(0xffF9F9F7),
+            hoverColor: ColorConstant.buttonBackColor,
             icon: Iconify(
               icon,
-              color: const Color(0xFF555555),
+              color: ColorConstant.iconColor,
             )),
       );
     }
@@ -35,12 +36,9 @@ class LandscapeGui extends StatelessWidget {
         width: screenWidth / 15,
         height: screenHeight,
         padding: EdgeInsets.symmetric(vertical: screenWidth / 35),
-
-        // EdgeInsets.only(top: screenWidth / 35, bottom: screenWidth / 35),
         decoration: BoxDecoration(
-            // color: const Color.fromARGB(255, 37, 37, 0),
-            color: const Color(0xffF9F9F7),
-            border: Border.all(color: const Color.fromARGB(10, 0, 0, 0))),
+            color: ColorConstant.buttonBackColor,
+            border: Border.all(color: ColorConstant.borderColor)),
         child: Column(
           children: [
             button(Ic.round_menu, () {
@@ -49,11 +47,11 @@ class LandscapeGui extends StatelessWidget {
             button(Ri.search_line, () {}),
             Expanded(
               child: IconButton(
-                hoverColor: const Color(0xffF9F9F7),
+                hoverColor: ColorConstant.buttonBackColor,
                 icon: PopupMenuButton(
-                    child: const Iconify(
+                    child: Iconify(
                       Ic.round_layers,
-                      color: Color(0xFF555555),
+                      color: ColorConstant.iconColor,
                       //size: screenWidth,
                     ),
                     itemBuilder: (context) {

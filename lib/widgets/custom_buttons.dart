@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
+import 'package:mivilsoft_app/utils/constants.dart';
 
 class CustomIconButton extends StatelessWidget {
   String? icon;
@@ -25,14 +26,14 @@ class CustomIconButton extends StatelessWidget {
   }
 
   Widget _buildButton(BuildContext context) {
-    Widget iconWidget = const Iconify(
+    Widget iconWidget = Iconify(
       Ic.round_broken_image,
-      color: Color(0xFFA40E0E),
+      color: ColorConstant.unavailable,
     );
     if (icon != null) {
       iconWidget = Iconify(
         icon!,
-        color: const Color(0xFF555555),
+        color: ColorConstant.iconColor,
         size: size! / 2,
       );
     }
@@ -45,8 +46,8 @@ class CustomIconButton extends StatelessWidget {
       height: size!,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(size!),
-          color: const Color(0xffF9F9F7),
-          border: Border.all(color: const Color.fromARGB(80, 0, 0, 0))),
+          color: ColorConstant.buttonBackColor,
+          border: Border.all(color: ColorConstant.borderColor)),
       child: IconButton(
         icon: iconWidget,
         onPressed: () {

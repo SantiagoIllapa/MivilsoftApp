@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
+import 'package:mivilsoft_app/utils/constants.dart';
 
 enum Menu { itemOne, itemTwo, itemThree, itemFour }
 
@@ -32,9 +33,9 @@ class CustomSearchBar extends StatelessWidget {
     Widget menuButton = Container();
     Widget filterButton = IconButton(
       icon: PopupMenuButton(
-        child: const Iconify(
+        child: Iconify(
           Ic.twotone_search,
-          color: Color(0xFF555555),
+          color: ColorConstant.iconColor,
         ),
         itemBuilder: (context) {
           return mapController!.typeMapList.keys
@@ -57,9 +58,9 @@ class CustomSearchBar extends StatelessWidget {
           onPressed: () {
             scaffoldKey!.currentState?.openDrawer();
           },
-          icon: const Iconify(
+          icon: Iconify(
             Ic.round_menu,
-            color: Color(0xFF555555),
+            color: ColorConstant.iconColor,
           ));
     }
     return Container(
@@ -67,12 +68,12 @@ class CustomSearchBar extends StatelessWidget {
       margin: EdgeInsets.only(
           left: 15, right: 15, bottom: 10, top: screenHeight / 20),
       height: screenHeight / 15,
-      //padding: EdgeInsets.symmetric(vertical: screenHeight / 100),
+
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: const Color(0xffF9F9F7),
+          color: ColorConstant.buttonBackColor,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: const Color.fromARGB(10, 0, 0, 0))),
+          border: Border.all(color: ColorConstant.borderColor)),
       child: Row(
         children: [
           menuButton,
