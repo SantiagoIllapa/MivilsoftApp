@@ -3,10 +3,12 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/Ri.dart';
 import 'package:iconify_flutter/icons/bi.dart';
 import 'package:iconify_flutter/icons/ic.dart';
+import 'package:mivilsoft_app/Classes/station.dart';
 import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
 import 'package:mivilsoft_app/app/ui/screens/information/informationScreen.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 import 'package:mivilsoft_app/widgets/custom_buttons.dart';
+import 'package:mivilsoft_app/widgets/station_menu.dart';
 
 // ignore: camel_case_types, must_be_immutable
 
@@ -27,6 +29,9 @@ class PortraitGui extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double buttonSize = screenHeight / 15;
     double buttonPadding = screenHeight / 45;
+    Station estacion = Station(context: context);
+    estacion.address = "Naranjas y Aguacates, Ambato, Ecuador";
+    estacion.title = "Estación Ficoa";
     return Padding(
       padding: EdgeInsets.all(buttonPadding),
       child: Column(
@@ -50,7 +55,7 @@ class PortraitGui extends StatelessWidget {
                         icon: PopupMenuButton(
                           child: Iconify(
                             Ic.round_layers,
-                            color: ColorConstant.iconColor,
+                            color: ColorConstant.grayColor,
                           ),
                           itemBuilder: (context) {
                             return mapControler!.typeMapList.keys
@@ -80,7 +85,6 @@ class PortraitGui extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => const InformationScreen()));
                     },
-                    heroTag: "Info",
                   ), //Información
                 )
               ],
@@ -92,16 +96,22 @@ class PortraitGui extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomIconButton(
-                    icon: Ri.gas_station_fill,
-                    size: buttonSize,
-                    funct: () {},
-                    heroTag: 'AddEstacion',
-                  ), //Add Estación
+                      icon: Ri.gas_station_fill,
+                      size: buttonSize,
+                      funct: () {
+                        showBottomSheet(
+                            backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+                            context: context,
+                            builder: (BuildContext context) {
+                              return StationMenu(
+                                station: estacion,
+                              );
+                            });
+                      }), //Add Estación
                   CustomIconButton(
                     icon: Ic.round_gps_fixed,
                     size: buttonSize,
                     funct: () {},
-                    heroTag: 'Gps',
                   ), //GPS
                 ]),
           ),

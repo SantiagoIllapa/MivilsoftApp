@@ -6,7 +6,7 @@ import 'package:mivilsoft_app/utils/constants.dart';
 
 // ignore: must_be_immutable
 class MainMenu extends StatelessWidget {
-  MainMenu({super.key});
+  const MainMenu({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -35,7 +35,7 @@ class CustomSearchBar extends StatelessWidget {
       icon: PopupMenuButton(
         child: Iconify(
           Ic.twotone_search,
-          color: ColorConstant.iconColor,
+          color: ColorConstant.grayColor,
         ),
         itemBuilder: (context) {
           return mapController!.typeMapList.keys
@@ -60,7 +60,7 @@ class CustomSearchBar extends StatelessWidget {
           },
           icon: Iconify(
             Ic.round_menu,
-            color: ColorConstant.iconColor,
+            color: ColorConstant.grayColor,
           ));
     }
     return Container(

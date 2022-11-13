@@ -3,6 +3,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/Ri.dart';
 import 'package:iconify_flutter/icons/bi.dart';
 import 'package:iconify_flutter/icons/ic.dart';
+import 'package:mivilsoft_app/Classes/station.dart';
 import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 
@@ -26,11 +27,12 @@ class LandscapeGui extends StatelessWidget {
             hoverColor: ColorConstant.buttonBackColor,
             icon: Iconify(
               icon,
-              color: ColorConstant.iconColor,
+              color: ColorConstant.grayColor,
             )),
       );
     }
 
+    Station estacion = Station(context: context);
     return Stack(children: [
       Container(
         width: screenWidth / 15,
@@ -51,7 +53,7 @@ class LandscapeGui extends StatelessWidget {
                 icon: PopupMenuButton(
                     child: Iconify(
                       Ic.round_layers,
-                      color: ColorConstant.iconColor,
+                      color: ColorConstant.grayColor,
                       //size: screenWidth,
                     ),
                     itemBuilder: (context) {

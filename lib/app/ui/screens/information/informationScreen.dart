@@ -29,7 +29,7 @@ class InformationScreen extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                  color: ColorConstant.iconColor,
+                  color: ColorConstant.grayColor,
                   fontFamily: "Roboto",
                   fontSize: 17),
             ),
@@ -58,7 +58,7 @@ class InformationScreen extends StatelessWidget {
                 child: Text(
                   "Leyenda del mapa",
                   style: TextStyle(
-                      color: ColorConstant.iconColor,
+                      color: ColorConstant.grayColor,
                       fontFamily: "Roboto",
                       fontSize: 20),
                 ),
@@ -70,7 +70,7 @@ class InformationScreen extends StatelessWidget {
                 child: Text(
                   "Estado de las Estaciones",
                   style: TextStyle(
-                      color: ColorConstant.iconColor,
+                      color: ColorConstant.grayColor,
                       fontFamily: "Roboto",
                       fontSize: 17),
                 ),
@@ -95,7 +95,7 @@ class InformationScreen extends StatelessWidget {
                 child: Text(
                   "Velocidad de carga de las estaciones",
                   style: TextStyle(
-                      color: ColorConstant.iconColor,
+                      color: ColorConstant.grayColor,
                       fontFamily: "Roboto",
                       fontSize: 17),
                 ),
@@ -120,7 +120,7 @@ class InformationScreen extends StatelessWidget {
                               "<11 KW",
                               textAlign: TextAlign.end,
                               style: TextStyle(
-                                  color: ColorConstant.iconColor,
+                                  color: ColorConstant.grayColor,
                                   fontFamily: "Roboto",
                                   fontSize: 10),
                             ),
@@ -138,7 +138,7 @@ class InformationScreen extends StatelessWidget {
                               "11-50 KW",
                               textAlign: TextAlign.end,
                               style: TextStyle(
-                                  color: ColorConstant.iconColor,
+                                  color: ColorConstant.grayColor,
                                   fontFamily: "Roboto",
                                   fontSize: 10),
                             ),
@@ -155,7 +155,7 @@ class InformationScreen extends StatelessWidget {
                               "<50-150 KW",
                               textAlign: TextAlign.end,
                               style: TextStyle(
-                                  color: ColorConstant.iconColor,
+                                  color: ColorConstant.grayColor,
                                   fontFamily: "Roboto",
                                   fontSize: 10),
                             ),
@@ -173,7 +173,7 @@ class InformationScreen extends StatelessWidget {
                               ">150 KW",
                               textAlign: TextAlign.end,
                               style: TextStyle(
-                                  color: ColorConstant.iconColor,
+                                  color: ColorConstant.grayColor,
                                   fontFamily: "Roboto",
                                   fontSize: 10),
                             ),
@@ -194,7 +194,7 @@ class InformationScreen extends StatelessWidget {
                     children: [
                       legendItem(
                           'Estación Disponible', ColorConstant.appBackColor),
-                      legendItem('Estación Ocupada', ColorConstant.iconColor),
+                      legendItem('Estación Ocupada', ColorConstant.grayColor),
                       legendItem(
                           'Estación No Funciona', ColorConstant.borderColor),
                     ],
@@ -211,7 +211,7 @@ class InformationScreen extends StatelessWidget {
                     children: [
                       legendItem(
                           'Estación Disponible', ColorConstant.appBackColor),
-                      legendItem('Estación Ocupada', ColorConstant.iconColor),
+                      legendItem('Estación Ocupada', ColorConstant.grayColor),
                       legendItem(
                           'Estación No Funciona', ColorConstant.borderColor),
                     ],
@@ -228,7 +228,7 @@ class InformationScreen extends StatelessWidget {
                     children: [
                       legendItem(
                           'Estación Disponible', ColorConstant.appBackColor),
-                      legendItem('Estación Ocupada', ColorConstant.iconColor),
+                      legendItem('Estación Ocupada', ColorConstant.grayColor),
                       legendItem(
                           'Estación No Funciona', ColorConstant.borderColor),
                     ],
@@ -245,7 +245,7 @@ class InformationScreen extends StatelessWidget {
                     children: [
                       legendItem(
                           'Estación Disponible', ColorConstant.appBackColor),
-                      legendItem('Estación Ocupada', ColorConstant.iconColor),
+                      legendItem('Estación Ocupada', ColorConstant.grayColor),
                       legendItem(
                           'Estación No Funciona', ColorConstant.borderColor),
                     ],

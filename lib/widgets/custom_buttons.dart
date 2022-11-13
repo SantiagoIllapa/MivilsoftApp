@@ -10,14 +10,12 @@ class CustomIconButton extends StatelessWidget {
   Widget? customIcon;
   Function? funct;
   double? size;
-  String? heroTag;
   CustomIconButton({
     Key? key,
     this.icon,
     this.customIcon,
     required this.size,
     required this.funct,
-    required this.heroTag,
   }) : super(key: key);
 
   @override
@@ -33,7 +31,7 @@ class CustomIconButton extends StatelessWidget {
     if (icon != null) {
       iconWidget = Iconify(
         icon!,
-        color: ColorConstant.iconColor,
+        color: ColorConstant.grayColor,
         size: size! / 2,
       );
     }

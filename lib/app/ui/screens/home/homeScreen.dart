@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
+import 'package:mivilsoft_app/utils/constants.dart';
 import 'package:mivilsoft_app/widgets/searchBar.dart';
 import 'package:mivilsoft_app/widgets/landscape_ui.dart';
 import 'package:mivilsoft_app/widgets/main_menu.dart';
@@ -37,6 +38,7 @@ class HomePage extends StatelessWidget {
     return ChangeNotifierProvider<HomeController>(
         create: (_) => HomeController(),
         child: Scaffold(
+            backgroundColor: ColorConstant.backgroundColor,
             resizeToAvoidBottomInset: false,
             key: _scaffoldKey,
             drawer: MainMenu(),

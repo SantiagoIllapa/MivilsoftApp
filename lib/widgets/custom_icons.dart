@@ -7,7 +7,7 @@ class CustomIcons {
   static Widget electricStationA = Stack(children: [
     Iconify(
       Ri.gas_station_fill,
-      color: ColorConstant.iconColor,
+      color: ColorConstant.grayColor,
     ),
     const Iconify(
       Ri.flashlight_fill,
