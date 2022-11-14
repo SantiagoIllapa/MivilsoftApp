@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
+import 'package:mivilsoft_app/Classes/conector.dart';
 import 'package:mivilsoft_app/Classes/station.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
+import 'package:mivilsoft_app/widgets/station_menu_sections.dart';
 
 class StationMenu extends StatefulWidget {
   Station station;
@@ -15,10 +17,14 @@ class StationMenu extends StatefulWidget {
 }
 
 class _StationMenuState extends State<StationMenu> {
+  List<Widget> workArea = [];
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
+    workArea.add(ConnectorSection(
+      station: widget.station,
+    ));
     return Container(
       // margin: EdgeInsets.only(left: screenWidth / 2),
       decoration: BoxDecoration(
@@ -95,11 +101,21 @@ class _StationMenuState extends State<StationMenu> {
                             ],
                           ),
                           Row(children: [
-                            Iconify(
-                              widget.station.isFavorite
-                                  ? Mdi.heart
-                                  : Mdi.heart_outline,
-                              color: ColorConstant.heartColor,
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  widget.station.isFavorite =
+                                      !widget.station.isFavorite;
+                                });
+                              },
+                              icon: Iconify(
+                                widget.station.isFavorite
+                                    ? Mdi.heart
+                                    : Mdi.heart_outline,
+                                color: widget.station.isFavorite
+                                    ? ColorConstant.heartColor
+                                    : ColorConstant.grayColor,
+                              ),
                             ),
                             Padding(
                               padding:
@@ -125,6 +141,7 @@ class _StationMenuState extends State<StationMenu> {
               Expanded(
                   child: Container(
                 color: ColorConstant.backgroundColor,
+                child: workArea[0],
               )),
               const StationNavBar(),
             ],

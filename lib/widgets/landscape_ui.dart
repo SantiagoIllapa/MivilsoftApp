@@ -79,7 +79,7 @@ class LandscapeGui extends StatelessWidget {
                       builder: (context) => const InformationScreen()));
             }),
             button(Ic.round_gps_fixed, () {}),
-            button(Ri.gas_station_fill, () {}),
+            button(Ic.round_ev_station, () {}),
           ],
         ),
       )
