@@ -3,13 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
-import 'package:mivilsoft_app/Classes/conector.dart';
 import 'package:mivilsoft_app/Classes/station.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
-import 'package:mivilsoft_app/widgets/station_menu_sections.dart';
+import 'package:mivilsoft_app/widgets/station_menu_Sections/comments_section.dart';
+import 'package:mivilsoft_app/widgets/station_menu_Sections/conector_section.dart';
+import 'package:mivilsoft_app/widgets/station_menu_Sections/information_section.dart';
+import 'package:mivilsoft_app/widgets/station_menu_Sections/pictures_section.dart';
 
 class StationMenu extends StatefulWidget {
   Station station;
+
   StationMenu({super.key, required this.station});
 
   @override
@@ -18,13 +21,34 @@ class StationMenu extends StatefulWidget {
 
 class _StationMenuState extends State<StationMenu> {
   List<Widget> workArea = [];
+  int index = 0;
+  StationNavBar? myNavBar;
+  @override
+  void initState() {
+    myNavBar = StationNavBar(currentIndex: (i) {
+      setState(() {
+        index = i;
+      });
+    });
+    workArea.add(ConnectorSection(
+      station: widget.station,
+    ));
+    workArea.add(InformationSection(
+      station: widget.station,
+    ));
+    workArea.add(PicturesSection(
+      station: widget.station,
+    ));
+    workArea.add(CommentsSection(
+      station: widget.station,
+    ));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    workArea.add(ConnectorSection(
-      station: widget.station,
-    ));
+
     return Container(
       // margin: EdgeInsets.only(left: screenWidth / 2),
       decoration: BoxDecoration(
@@ -32,7 +56,7 @@ class _StationMenuState extends State<StationMenu> {
           borderRadius: BorderRadius.circular(3)),
       padding: const EdgeInsets.only(top: 5),
       child: SizedBox(
-        height: screenHeight / 2,
+        height: screenHeight * 0.6,
         // width: screenWidth / 2,
         child: Container(
           child: (Column(
@@ -75,22 +99,6 @@ class _StationMenuState extends State<StationMenu> {
                         children: [
                           Row(
                             children: [
-                              Iconify(
-                                Mdi.star,
-                                color: ColorConstant.scoreColor,
-                              ),
-                              Iconify(
-                                Mdi.star,
-                                color: ColorConstant.scoreColor,
-                              ),
-                              Iconify(
-                                Mdi.star,
-                                color: ColorConstant.scoreColor,
-                              ),
-                              Iconify(
-                                Mdi.star,
-                                color: ColorConstant.scoreColor,
-                              ),
                               Iconify(
                                 Mdi.star,
                                 color: ColorConstant.scoreColor,
@@ -141,9 +149,9 @@ class _StationMenuState extends State<StationMenu> {
               Expanded(
                   child: Container(
                 color: ColorConstant.backgroundColor,
-                child: workArea[0],
+                child: workArea[index],
               )),
-              const StationNavBar(),
+              Container(child: myNavBar),
             ],
           )),
         ),
@@ -153,7 +161,8 @@ class _StationMenuState extends State<StationMenu> {
 }
 
 class StationNavBar extends StatefulWidget {
-  const StationNavBar({super.key});
+  final Function currentIndex;
+  const StationNavBar({super.key, required this.currentIndex});
 
   @override
   State<StationNavBar> createState() => _StationNavBarState();
@@ -167,7 +176,7 @@ class _StationNavBarState extends State<StationNavBar> {
             color: (index == idx)
                 ? ColorConstant.available
                 : ColorConstant.grayColor),
-        label: 'Conectores');
+        label: label);
   }
 
   @override
@@ -182,6 +191,7 @@ class _StationNavBarState extends State<StationNavBar> {
       onTap: (int i) {
         setState(() {
           index = i;
+          widget.currentIndex(i);
         });
       },
       items: [

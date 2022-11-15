@@ -7,21 +7,42 @@ import 'package:mivilsoft_app/Classes/conector.dart';
 import 'package:mivilsoft_app/Classes/station.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 
-class ConnectorSection extends StatelessWidget {
+class ConnectorSection extends StatefulWidget {
   Station station;
+
+  ConnectorSection({super.key, required this.station});
+
+  @override
+  State<ConnectorSection> createState() => _ConnectorSectionState();
+}
+
+class _ConnectorSectionState extends State<ConnectorSection> {
   List<Widget> conectorsWidgets = [];
-  ConnectorSection({super.key, required this.station}) {
+  late bool loading;
+  @override
+  void initState() {
+    loading = true;
     buildConectors();
+    super.initState();
   }
+
   Widget buttonAction(String icon, Function fun) {
     return Container(
-      child: Iconify(icon, color: ColorConstant.grayColor),
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: GestureDetector(
+        onTap: () => fun(),
+        child: Iconify(
+          icon,
+          color: ColorConstant.grayColor,
+        ),
+      ),
     );
   }
 
   void buildConectors() {
-    for (Conector conector in station.conectores) {
+    for (Conector conector in widget.station.conectors) {
       conectorsWidgets.add(Container(
+        height: 45,
         margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
             color: ColorConstant.white,
@@ -46,14 +67,12 @@ class ConnectorSection extends StatelessWidget {
                       style: TextStyle(
                           color: ColorConstant.grayColor,
                           fontWeight: FontWeight.bold,
-                          fontSize: 10),
+                          fontSize: 12),
                     ),
                     Text(
                       '${conector.power} kW',
                       style: TextStyle(
-                          color: ColorConstant.grayColor,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 7),
+                          color: ColorConstant.grayColor, fontSize: 10),
                     )
                   ],
                 ),
@@ -65,7 +84,7 @@ class ConnectorSection extends StatelessWidget {
               conector.status?.key,
               style: TextStyle(
                   color: conector.status?.value,
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -73,14 +92,25 @@ class ConnectorSection extends StatelessWidget {
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.only(right: 5),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                buttonAction(Mdi.check_circle_outline, () {}),
-                buttonAction(Mdi.calendar_edit_outline, () {}),
-                buttonAction(Mdi.cellphone_wireless, () {}),
-                buttonAction(Mdi.currency_usd_circle_outline, () {}),
+                buttonAction(Mdi.check_circle_outline, () {
+                  print('Check');
+                }),
+                buttonAction(Mdi.calendar_edit_outline, () {
+                  print('Calendario');
+                }),
+                buttonAction(Mdi.cellphone_wireless, () {
+                  print('Cell');
+                }),
+                buttonAction(Mdi.currency_usd_circle_outline, () {
+                  print('Dollar');
+                }),
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
-                  child: buttonAction(Mdi.menu, () {}),
+                  child: buttonAction(Mdi.menu, () {
+                    print('menu');
+                  }),
                 ),
               ],
             ),
@@ -88,6 +118,12 @@ class ConnectorSection extends StatelessWidget {
         ]),
       ));
     }
+
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        loading = false;
+      });
+    });
   }
 
   @override
@@ -99,15 +135,17 @@ class ConnectorSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
-              "Conectores (${station.conectores.length})",
+              "Conectores (${widget.station.conectors.length})",
               style: TextStyle(
                   color: ColorConstant.grayColor, fontWeight: FontWeight.bold),
             ),
           ),
-          Expanded(
-              child: ListView(
-            children: conectorsWidgets,
-          ))
+          loading
+              ? const Center(child: CircularProgressIndicator())
+              : Expanded(
+                  child: ListView(
+                  children: conectorsWidgets,
+                ))
         ],
       ),
     );

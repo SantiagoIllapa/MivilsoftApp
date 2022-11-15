@@ -12,9 +12,9 @@ Map<String, String> chargerType = {
 };
 
 Map<String, Color> chargerStatus = {
-  "Broken": ColorConstant.unavailable,
-  "Available": ColorConstant.available,
-  "Occupied": ColorConstant.occupied,
+  "Dañado": ColorConstant.unavailable,
+  "Disponible": ColorConstant.available,
+  "Ocupado": ColorConstant.occupied,
 };
 
 class Tariff {
