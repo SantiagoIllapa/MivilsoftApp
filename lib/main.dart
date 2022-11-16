@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mivilsoft_app/app/ui/routes/pages.dart';
-import 'package:mivilsoft_app/app/ui/routes/routes.dart';
-import 'package:mivilsoft_app/app/ui/screens/location/location_controller.dart';
+import 'package:mivilsoft_app/app/view/routes/pages.dart';
+import 'package:mivilsoft_app/app/view/routes/routes.dart';
+import 'package:mivilsoft_app/app/controller/logic/location_controller.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
