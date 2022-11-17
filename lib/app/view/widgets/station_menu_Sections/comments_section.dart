@@ -4,16 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
-import 'package:mivilsoft_app/app/controller/logic/station_menu_logic.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 
 import '../../../model/Classes/comment.dart';
+import '../../../model/Classes/station.dart';
 
 class CommentsSection extends StatefulWidget {
-  StationMenuLogic stationController;
-  CommentsSection({super.key, required this.stationController}) {
-    print("creación de selección comentarioas");
-  }
+  Station station;
+  CommentsSection({super.key, required this.station});
 
   @override
   State<CommentsSection> createState() => _CommentsSectionState();
@@ -25,21 +23,13 @@ class _CommentsSectionState extends State<CommentsSection> {
 
   @override
   void initState() {
-    loading = widget.stationController.currentStation!.loading["comments"]!;
+    loading = true;
     super.initState();
-    widget.stationController.commentCallback = _refresh;
-  }
-
-  void _refresh() {
-    setState(() {
-      print("holaaaaa recarga");
-      _buildComments();
-      loading = widget.stationController.currentStation!.loading["comments"]!;
-    });
+    // widget.stationController.commentCallback = _refresh;
   }
 
   void _buildComments() {
-    for (Comment comm in widget.stationController.currentStation!.comments) {
+    for (Comment comm in widget.station.comments) {
       commentsWidgets.add(ListTile(
         title: Text(comm.name),
         subtitle: Text(comm.description),

@@ -5,11 +5,12 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
 import 'package:mivilsoft_app/app/controller/logic/station_menu_logic.dart';
 import 'package:mivilsoft_app/app/model/Classes/station.dart';
+import 'package:mivilsoft_app/app/view/widgets/station_menu_Sections/information_section.dart';
+import 'package:mivilsoft_app/app/view/widgets/station_menu_Sections/pictures_section.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 import 'package:mivilsoft_app/app/view/widgets/station_menu_Sections/comments_section.dart';
 import 'package:mivilsoft_app/app/view/widgets/station_menu_Sections/conector_section.dart';
-import 'package:mivilsoft_app/app/view/widgets/station_menu_Sections/information_section.dart';
-import 'package:mivilsoft_app/app/view/widgets/station_menu_Sections/pictures_section.dart';
+
 import 'package:provider/provider.dart';
 
 class StationMenu extends StatefulWidget {
@@ -63,7 +64,7 @@ class _StationMenuState extends State<StationMenu> {
     ));
 
     workArea1.add(CommentsSection(
-      stationController: menuLogic,
+      station: widget.station,
     ));
     workArea = workArea1;
   }

@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:mivilsoft_app/app/model/Classes/comment.dart';
 import 'package:mivilsoft_app/app/model/Classes/conector.dart';
-import 'package:mivilsoft_app/app/controller/logic/station_menu_logic.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,15 +25,9 @@ class Station {
   double score = 0;
   double distance = 0;
   bool isFavorite = false;
-  List<Conector> conectors = [];
+  List<Conector>? conectors;
   List<Comment> comments = [];
-  List<Widget> pictures = [];
-  Map<String, bool> loading = {
-    'conectors': true,
-    'information': true,
-    'pictures': true,
-    'comments': true,
-  };
+  List<Image>? pictures;
 
   Contact contactPerson = Contact(
     name: "Juanito Perez",
@@ -43,37 +37,50 @@ class Station {
 
   String provider = "https://map.electromaps.com/es/p/3241234";
   Station() {
-    _loadConectors();
     _loadInformation();
-    _loadPictures();
   }
-  void _loadConectors() async {
+  Future<Object> getConectors() async {
+    print("solicita conectors");
+    return conectors ?? _loadConectors();
+  }
+
+  Future<Object> getPictures() async {
+    print("solicita pictures");
+    return pictures ?? _loadPictures();
+  }
+
+  Future<List<Image>> _loadPictures() async {
+    print("no hay lista... creando");
+    List<Image> newImageList = [];
+    await Future.delayed(const Duration(milliseconds: 5000), () async {
+      final response =
+          await http.get(Uri.parse('https://picsum.photos/v2/list'));
+      final json = jsonDecode(response.body);
+
+      for (var img in json) {
+        newImageList.add(
+            Image.network('https://picsum.photos/id/${img['id']}/500/500'));
+      }
+    });
+    print('imagenes cargadas');
+    pictures = newImageList;
+    return newImageList;
+  }
+
+  Future<List<Conector>> _loadConectors() async {
+    List<Conector> newConectorList = [];
+    await Future.delayed(const Duration(milliseconds: 5000), () {
+      newConectorList = conectores;
+    });
     address = "Naranjas y Aguacates, Ambato, Ecuador";
     title = "Estación Ficoa";
-    conectors = conectores;
-    loading["conectors"] = false;
+    print('conectores cargados');
+    conectors = newConectorList;
+    return newConectorList;
   }
 
   void _loadInformation() async {
-    Future.delayed(const Duration(milliseconds: 8000), () {
-      loading["information"] = false;
-    });
-  }
-
-  void _loadPictures() async {
-    final response = await http.get(Uri.parse('https://picsum.photos/v2/list'));
-
-    final json = jsonDecode(response.body);
-    for (var img in json) {
-      pictures.add(Image.network(
-        'https://picsum.photos/id/${img['id']}/150/150',
-      ));
-    }
-    Future.delayed(const Duration(milliseconds: 4000), () {
-      print("aaaa");
-
-      loading["pictures"] = false;
-    });
+    Future.delayed(const Duration(milliseconds: 8000), () {});
   }
 
   List<Conector> conectores = [

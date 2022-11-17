@@ -18,12 +18,24 @@ class ConnectorSection extends StatefulWidget {
 
 class _ConnectorSectionState extends State<ConnectorSection> {
   List<Widget> conectorsWidgets = [];
+  late List<Conector> conectors;
   late bool loading;
   @override
   void initState() {
-    loading = widget.station.loading["conectors"]!;
-    buildConectors();
+    conectors = [];
+    loading = true;
+    _loadConectors();
     super.initState();
+  }
+
+  void _loadConectors() async {
+    final response = await widget.station.getConectors();
+    conectors = response as List<Conector>;
+    print("cargado las conectores");
+    buildConectors();
+    setState(() {
+      loading = false;
+    });
   }
 
   Widget buttonAction(String icon, Function fun) {
@@ -40,7 +52,7 @@ class _ConnectorSectionState extends State<ConnectorSection> {
   }
 
   void buildConectors() {
-    for (Conector conector in widget.station.conectors) {
+    for (Conector conector in conectors) {
       conectorsWidgets.add(Container(
         height: 45,
         margin: const EdgeInsets.all(5),
@@ -129,7 +141,7 @@ class _ConnectorSectionState extends State<ConnectorSection> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
-              "Conectores (${widget.station.conectors.length})",
+              "Conectores (${conectors.length})",
               style: TextStyle(
                   color: ColorConstant.grayColor, fontWeight: FontWeight.bold),
             ),
