@@ -3,13 +3,13 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/Ri.dart';
 import 'package:iconify_flutter/icons/bi.dart';
 import 'package:iconify_flutter/icons/ic.dart';
-import 'package:mivilsoft_app/Classes/conector.dart';
-import 'package:mivilsoft_app/Classes/station.dart';
-import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
-import 'package:mivilsoft_app/app/ui/screens/information/informationScreen.dart';
+import 'package:mivilsoft_app/app/model/Classes/conector.dart';
+import 'package:mivilsoft_app/app/model/Classes/station.dart';
+import 'package:mivilsoft_app/app/view/screens/home/home_controller.dart';
+import 'package:mivilsoft_app/app/view/screens/informationScreen.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
-import 'package:mivilsoft_app/widgets/custom_buttons.dart';
-import 'package:mivilsoft_app/widgets/station_menu.dart';
+import 'package:mivilsoft_app/app/view/widgets/custom_buttons.dart';
+import 'package:mivilsoft_app/app/view/widgets/station_menu.dart';
 
 // ignore: camel_case_types, must_be_immutable
 
@@ -30,34 +30,6 @@ class PortraitGui extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double buttonSize = screenHeight / 15;
     double buttonPadding = screenHeight / 45;
-
-    List<Conector> conectores = [
-      Conector(
-          power: 250,
-          type: chargerType.entries.elementAt(1),
-          status: chargerStatus.entries.elementAt(0)),
-      Conector(
-          power: 150,
-          type: chargerType.entries.elementAt(2),
-          status: chargerStatus.entries.elementAt(1)),
-      Conector(
-          power: 350,
-          type: chargerType.entries.elementAt(0),
-          status: chargerStatus.entries.elementAt(2)),
-      Conector(
-          power: 110,
-          type: chargerType.entries.elementAt(3),
-          status: chargerStatus.entries.elementAt(0)),
-      Conector(
-          power: 110,
-          type: chargerType.entries.elementAt(4),
-          status: chargerStatus.entries.elementAt(0)),
-      Conector(
-          power: 110,
-          type: chargerType.entries.elementAt(5),
-          status: chargerStatus.entries.elementAt(0)),
-    ];
-
     return Padding(
       padding: EdgeInsets.all(buttonPadding),
       child: Column(
@@ -129,11 +101,7 @@ class PortraitGui extends StatelessWidget {
                             backgroundColor: const Color.fromARGB(0, 0, 0, 0),
                             context: context,
                             builder: (BuildContext context) {
-                              Station estacion = Station(context: context);
-                              estacion.address =
-                                  "Naranjas y Aguacates, Ambato, Ecuador";
-                              estacion.title = "Estación Ficoa";
-                              estacion.conectors = conectores;
+                              Station estacion = Station();
                               return StationMenu(
                                 station: estacion,
                               );

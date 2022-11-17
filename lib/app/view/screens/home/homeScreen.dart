@@ -1,12 +1,12 @@
 // ignore_for_file: file_names, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
+import 'package:mivilsoft_app/app/view/screens/home/home_controller.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
-import 'package:mivilsoft_app/widgets/searchBar.dart';
-import 'package:mivilsoft_app/widgets/landscape_ui.dart';
-import 'package:mivilsoft_app/widgets/main_menu.dart';
-import 'package:mivilsoft_app/widgets/portrait_ui.dart';
+import 'package:mivilsoft_app/app/view/widgets/searchBar.dart';
+import 'package:mivilsoft_app/app/view/widgets/landscape_ui.dart';
+import 'package:mivilsoft_app/app/view/widgets/main_menu.dart';
+import 'package:mivilsoft_app/app/view/widgets/portrait_ui.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -26,7 +26,6 @@ class HomePage extends StatelessWidget {
           myLocationEnabled: false,
           myLocationButtonEnabled: false,
           markers: controller.markers,
-          
           mapToolbarEnabled: false,
           onTap: controller.onTap);
     }

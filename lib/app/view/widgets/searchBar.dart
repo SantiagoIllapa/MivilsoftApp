@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
-import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
+import 'package:mivilsoft_app/app/view/screens/home/home_controller.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 
 enum Menu { itemOne, itemTwo, itemThree, itemFour }

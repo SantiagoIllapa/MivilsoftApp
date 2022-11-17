@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mivilsoft_app/app/ui/screens/splash/splash_controller.dart';
+import 'package:mivilsoft_app/app/controller/logic/splash_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SplashPage extends StatefulWidget {

@@ -3,11 +3,12 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/Ri.dart';
 import 'package:iconify_flutter/icons/bi.dart';
 import 'package:iconify_flutter/icons/ic.dart';
-import 'package:mivilsoft_app/Classes/station.dart';
-import 'package:mivilsoft_app/app/ui/screens/home/home_controller.dart';
+import 'package:mivilsoft_app/app/model/Classes/station.dart';
+import 'package:mivilsoft_app/app/view/screens/home/home_controller.dart';
+import 'package:mivilsoft_app/app/view/widgets/station_menu.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 
-import '../app/ui/screens/information/informationScreen.dart';
+import '../screens/informationScreen.dart';
 
 // ignore: camel_case_types, must_be_immutable
 class LandscapeGui extends StatelessWidget {
@@ -32,7 +33,6 @@ class LandscapeGui extends StatelessWidget {
       );
     }
 
-    Station estacion = Station(context: context);
     return Stack(children: [
       Container(
         width: screenWidth / 15,
@@ -46,7 +46,17 @@ class LandscapeGui extends StatelessWidget {
             button(Ic.round_menu, () {
               scaffoldKey!.currentState?.openDrawer();
             }),
-            button(Ri.search_line, () {}),
+            button(Ri.search_line, () {
+              showBottomSheet(
+                  backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+                  context: context,
+                  builder: (BuildContext context) {
+                    Station estacion = Station();
+                    return StationMenu(
+                      station: estacion,
+                    );
+                  });
+            }),
             Expanded(
               child: IconButton(
                 hoverColor: ColorConstant.buttonBackColor,

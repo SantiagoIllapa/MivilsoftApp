@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:mivilsoft_app/app/ui/routes/routes.dart';
+import 'package:mivilsoft_app/app/view/routes/routes.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SplashController extends ChangeNotifier {

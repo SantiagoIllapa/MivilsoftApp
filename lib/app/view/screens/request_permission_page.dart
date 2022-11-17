@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mivilsoft_app/app/ui/routes/routes.dart';
-import 'package:mivilsoft_app/app/ui/screens/request_permission/request_permission_controller.dart';
+import 'package:mivilsoft_app/app/view/routes/routes.dart';
+import 'package:mivilsoft_app/app/controller/logic/request_permission_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class RequestPermissionPage extends StatefulWidget {

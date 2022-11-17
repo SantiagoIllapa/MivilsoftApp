@@ -3,12 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
-import 'package:mivilsoft_app/Classes/station.dart';
+import 'package:mivilsoft_app/app/controller/logic/station_menu_logic.dart';
+import 'package:mivilsoft_app/app/model/Classes/station.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
-import 'package:mivilsoft_app/widgets/station_menu_Sections/comments_section.dart';
-import 'package:mivilsoft_app/widgets/station_menu_Sections/conector_section.dart';
-import 'package:mivilsoft_app/widgets/station_menu_Sections/information_section.dart';
-import 'package:mivilsoft_app/widgets/station_menu_Sections/pictures_section.dart';
+import 'package:mivilsoft_app/app/view/widgets/station_menu_Sections/comments_section.dart';
+import 'package:mivilsoft_app/app/view/widgets/station_menu_Sections/conector_section.dart';
+import 'package:mivilsoft_app/app/view/widgets/station_menu_Sections/information_section.dart';
+import 'package:mivilsoft_app/app/view/widgets/station_menu_Sections/pictures_section.dart';
+import 'package:provider/provider.dart';
 
 class StationMenu extends StatefulWidget {
   Station station;
@@ -30,19 +32,40 @@ class _StationMenuState extends State<StationMenu> {
         index = i;
       });
     });
-    workArea.add(ConnectorSection(
-      station: widget.station,
-    ));
-    workArea.add(InformationSection(
-      station: widget.station,
-    ));
-    workArea.add(PicturesSection(
-      station: widget.station,
-    ));
-    workArea.add(CommentsSection(
-      station: widget.station,
-    ));
+    // workArea.add(ConnectorSection(
+    //   station: widget.station,
+    // ));
+    // workArea.add(InformationSection(
+    //   station: widget.station,
+    // ));
+    // workArea.add(PicturesSection(
+    //   station: widget.station,
+    // ));
+    // StationMenuLogic menuLogic =
+    //     StationMenuLogic(currentStation: widget.station);
+
+    // workArea.add(CommentsSection(
+    //   stationController: menuLogic,
+    // ));
     super.initState();
+  }
+
+  void addSections(StationMenuLogic menuLogic) {
+    List<Widget> workArea1 = [];
+    workArea1.add(ConnectorSection(
+      station: widget.station,
+    ));
+    workArea1.add(InformationSection(
+      station: widget.station,
+    ));
+    workArea1.add(PicturesSection(
+      station: widget.station,
+    ));
+
+    workArea1.add(CommentsSection(
+      stationController: menuLogic,
+    ));
+    workArea = workArea1;
   }
 
   @override
@@ -146,11 +169,16 @@ class _StationMenuState extends State<StationMenu> {
                   ],
                 ),
               ),
-              Expanded(
-                  child: Container(
-                color: ColorConstant.backgroundColor,
-                child: workArea[index],
-              )),
+              ChangeNotifierProvider<StationMenuLogic>(
+                  create: (_) => StationMenuLogic(),
+                  child: Expanded(child:
+                      Consumer<StationMenuLogic>(builder: (_, controller, __) {
+                    addSections(controller);
+                    return Container(
+                      color: ColorConstant.backgroundColor,
+                      child: workArea[index],
+                    );
+                  }))),
               Container(child: myNavBar),
             ],
           )),

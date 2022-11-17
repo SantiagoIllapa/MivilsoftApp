@@ -6,7 +6,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_webservice/src/places.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:mivilsoft_app/app/ui/screens/location/location_service.dart';
+import 'package:mivilsoft_app/app/controller/services/location_service.dart';
 
 class LocationController extends GetxController {
   final Placemark _pickPlaceMark = Placemark();

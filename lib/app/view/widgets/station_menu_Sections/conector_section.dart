@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
-import 'package:mivilsoft_app/Classes/conector.dart';
-import 'package:mivilsoft_app/Classes/station.dart';
+import 'package:mivilsoft_app/app/model/Classes/conector.dart';
+import 'package:mivilsoft_app/app/model/Classes/station.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 
 class ConnectorSection extends StatefulWidget {
@@ -21,7 +21,7 @@ class _ConnectorSectionState extends State<ConnectorSection> {
   late bool loading;
   @override
   void initState() {
-    loading = true;
+    loading = widget.station.loading["conectors"]!;
     buildConectors();
     super.initState();
   }
@@ -118,12 +118,6 @@ class _ConnectorSectionState extends State<ConnectorSection> {
         ]),
       ));
     }
-
-    Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {
-        loading = false;
-      });
-    });
   }
 
   @override

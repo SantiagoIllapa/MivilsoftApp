@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 class Comment {
-  String comment = '';
+  String description = '';
   int score = 0;
-  DateTime fecha = DateTime.now();
+  DateTime date = DateTime.now();
   Widget? icon;
   String name = "";
 }

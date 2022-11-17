@@ -1,12 +1,26 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:mivilsoft_app/Classes/station.dart';
+import 'package:mivilsoft_app/app/model/Classes/station.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 
-class InformationSection extends StatelessWidget {
+class InformationSection extends StatefulWidget {
   Station station;
   InformationSection({super.key, required this.station});
+
+  @override
+  State<InformationSection> createState() => _InformationSectionState();
+}
+
+class _InformationSectionState extends State<InformationSection> {
+  late bool loading;
+  @override
+  void initState() {
+    loading = widget.station.loading["information"]!;
+
+    super.initState();
+  }
+
   Widget informationBox(String title, String subtitle, bool isHipertext) {
     return Container(
       decoration: BoxDecoration(
@@ -42,18 +56,21 @@ class InformationSection extends StatelessWidget {
                   color: ColorConstant.grayColor, fontWeight: FontWeight.bold),
             ),
           ),
-          Expanded(
-              child: ListView(
-            children: [
-              informationBox(
-                  'Persona de Contacto', station.contactPerson.name, false),
-              informationBox(
-                  'Teléfono de contacto', station.contactPerson.phone, true),
-              informationBox(
-                  'Email de Contacto', station.contactPerson.email, true),
-              informationBox('Proveedor de Servicio', station.provider, true),
-            ],
-          ))
+          loading
+              ? const Center(child: CircularProgressIndicator())
+              : Expanded(
+                  child: ListView(
+                  children: [
+                    informationBox('Persona de Contacto',
+                        widget.station.contactPerson.name, false),
+                    informationBox('Teléfono de contacto',
+                        widget.station.contactPerson.phone, true),
+                    informationBox('Email de Contacto',
+                        widget.station.contactPerson.email, true),
+                    informationBox(
+                        'Proveedor de Servicio', widget.station.provider, true),
+                  ],
+                ))
         ],
       ),
     );

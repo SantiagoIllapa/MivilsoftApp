@@ -1,48 +1,76 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
-import 'package:mivilsoft_app/Classes/station.dart';
+import 'package:mivilsoft_app/app/controller/logic/station_menu_logic.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
-import 'package:iconify_flutter/icons/ion.dart';
-import 'package:http/http.dart' as http;
 
-class PicturesSection extends StatefulWidget {
-  Station station;
-  PicturesSection({super.key, required this.station});
+import '../../../model/Classes/comment.dart';
 
-  @override
-  State<PicturesSection> createState() => _PicturesSectionState();
-}
-
-class _PicturesSectionState extends State<PicturesSection> {
-  late bool loading;
-  late List<String> idsImg;
-  @override
-  void initState() {
-    loading = true;
-    idsImg = [];
-    _loadImgIds();
-    super.initState();
+class CommentsSection extends StatefulWidget {
+  StationMenuLogic stationController;
+  CommentsSection({super.key, required this.stationController}) {
+    print("creación de selección comentarioas");
   }
 
-  void _loadImgIds() async {
-    final response = await http.get(Uri.parse('https://picsum.photos/v2/list'));
-    final json = jsonDecode(response.body);
-    List<String> ids = [];
-    for (var img in json) {
-      ids.add(img['id']);
-    }
+  @override
+  State<CommentsSection> createState() => _CommentsSectionState();
+}
 
+class _CommentsSectionState extends State<CommentsSection> {
+  late bool loading;
+  late List<Widget> commentsWidgets = [];
+
+  @override
+  void initState() {
+    loading = widget.stationController.currentStation!.loading["comments"]!;
+    super.initState();
+    widget.stationController.commentCallback = _refresh;
+  }
+
+  void _refresh() {
     setState(() {
-      loading = false;
-      idsImg = ids;
+      print("holaaaaa recarga");
+      _buildComments();
+      loading = widget.stationController.currentStation!.loading["comments"]!;
     });
+  }
+
+  void _buildComments() {
+    for (Comment comm in widget.stationController.currentStation!.comments) {
+      commentsWidgets.add(ListTile(
+        title: Text(comm.name),
+        subtitle: Text(comm.description),
+        leading: Iconify(Mdi.account_circle, color: ColorConstant.grayColor),
+        trailing: Column(
+          children: [Text(comm.date.toString()), _buildScore(comm.score)],
+        ),
+      ));
+    }
+    loading = false;
+  }
+
+  Widget _buildScore(int score) {
+    Row rowStars = Row();
+    List<Iconify> listStars = [];
+    int rest = score;
+    for (var i = 0; i < score; i++) {
+      listStars.add(Iconify(
+        Mdi.star,
+        color: ColorConstant.scoreColor,
+      ));
+    }
+    while (score < 5) {
+      listStars.add(Iconify(
+        Mdi.star_outline,
+        color: ColorConstant.scoreColor,
+      ));
+    }
+    return Row(
+      children: listStars,
+    );
   }
 
   @override
@@ -54,20 +82,20 @@ class _PicturesSectionState extends State<PicturesSection> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
-              "Fotos(${idsImg.length})",
+              "Comentarios(${commentsWidgets.length})",
               style: TextStyle(
                   color: ColorConstant.grayColor, fontWeight: FontWeight.bold),
             ),
           ),
           loading
               ? const Center(child: CircularProgressIndicator())
-              : idsImg.isEmpty
+              : commentsWidgets.isEmpty
                   ? Column(
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 75),
                           child: Text(
-                            "Aún no existe fotografías de este sitio por favor añadalas",
+                            "Aún no existe comentarios de este sitio por favor añadalos",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: ColorConstant.grayColor,
@@ -93,7 +121,7 @@ class _PicturesSectionState extends State<PicturesSection> {
                                         padding:
                                             const EdgeInsets.only(bottom: 20),
                                         child: Iconify(
-                                          Ic.round_ev_station,
+                                          Ic.round_insert_comment,
                                           size: 50,
                                           color: ColorConstant.lightBorderColor,
                                         ),
@@ -102,7 +130,7 @@ class _PicturesSectionState extends State<PicturesSection> {
                                         padding:
                                             const EdgeInsets.only(bottom: 15),
                                         child: Iconify(
-                                          Ion.car_sport,
+                                          Ic.round_people_alt,
                                           size: 50,
                                           color: ColorConstant.lightBorderColor,
                                         ),
@@ -114,50 +142,9 @@ class _PicturesSectionState extends State<PicturesSection> {
                         )
                       ],
                     )
-                  : Expanded(
-                      child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 4),
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ImagePage(idsImg[index]),
-                            ));
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.all(10),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: Image.network(
-                                'https://picsum.photos/id/${idsImg[index]}/150/150',
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: idsImg.length,
-                    ))
+                  : Expanded(child: ListView(children: commentsWidgets))
         ],
       ),
-    );
-  }
-}
-
-class ImagePage extends StatelessWidget {
-  final String id;
-  const ImagePage(this.id, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-      ),
-      backgroundColor: Colors.black,
-      body:
-          Center(child: Image.network('https://picsum.photos/id/$id/800/800')),
     );
   }
 }
