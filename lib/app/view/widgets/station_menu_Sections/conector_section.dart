@@ -31,9 +31,9 @@ class _ConnectorSectionState extends State<ConnectorSection> {
   void _loadConectors() async {
     final response = await widget.station.getConectors();
     conectors = response as List<Conector>;
-    print("cargado las conectores");
-    buildConectors();
+    if (!mounted) return;
     setState(() {
+      buildConectors();
       loading = false;
     });
   }

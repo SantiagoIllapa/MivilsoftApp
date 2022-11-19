@@ -3,5 +3,8 @@ import 'package:mivilsoft_app/app/model/Classes/station.dart';
 
 class StationMenuLogic extends ChangeNotifier {
   Station? currentStation;
-  StationMenuLogic({this.currentStation}) {}
+  StationMenuLogic({this.currentStation});
+  setCurrentStation(Station station) {
+    currentStation = station;
+  }
 }

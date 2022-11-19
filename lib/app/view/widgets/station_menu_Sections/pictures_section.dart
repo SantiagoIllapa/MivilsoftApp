@@ -1,7 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
@@ -9,7 +7,6 @@ import 'package:iconify_flutter/icons/mdi.dart';
 import 'package:mivilsoft_app/app/model/Classes/station.dart';
 import 'package:mivilsoft_app/utils/constants.dart';
 import 'package:iconify_flutter/icons/ion.dart';
-import 'package:http/http.dart' as http;
 
 class PicturesSection extends StatefulWidget {
   Station station;
@@ -34,27 +31,11 @@ class _PicturesSectionState extends State<PicturesSection> {
   void _loadPictures() async {
     final response = await widget.station.getPictures();
     images = response as List<Image>;
-    print("cargado las fotos");
 
+    if (!mounted) return;
     setState(() {
       loading = false;
     });
-  }
-
-  void _loadImgIds() async {
-    final response = await http.get(Uri.parse('https://picsum.photos/v2/list'));
-    final json = jsonDecode(response.body);
-    List<String> ids = [];
-    for (var img in json) {
-      ids.add(img['id']);
-    }
-    try {
-      setState(() {
-        loading = false;
-        // idsImg = ids;
-      });
-      // ignore: empty_catches
-    } catch (e) {}
   }
 
   @override

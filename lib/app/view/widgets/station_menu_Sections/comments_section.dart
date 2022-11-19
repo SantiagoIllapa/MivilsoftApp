@@ -20,42 +20,82 @@ class CommentsSection extends StatefulWidget {
 class _CommentsSectionState extends State<CommentsSection> {
   late bool loading;
   late List<Widget> commentsWidgets = [];
-
+  late List<Comment> comments;
   @override
   void initState() {
+    comments = [];
     loading = true;
+    _loadComments();
     super.initState();
-    // widget.stationController.commentCallback = _refresh;
+  }
+
+  void _loadComments() async {
+    final response = await widget.station.getComments();
+    comments = response as List<Comment>;
+
+    if (!mounted) return;
+    setState(() {
+      _buildComments();
+      loading = false;
+    });
   }
 
   void _buildComments() {
-    for (Comment comm in widget.station.comments) {
-      commentsWidgets.add(ListTile(
-        title: Text(comm.name),
-        subtitle: Text(comm.description),
-        leading: Iconify(Mdi.account_circle, color: ColorConstant.grayColor),
-        trailing: Column(
-          children: [Text(comm.date.toString()), _buildScore(comm.score)],
+    for (Comment comm in comments) {
+      String date = '${comm.date.day}/${comm.date.month}/${comm.date.year}';
+      String time = '${comm.date.hour}:${comm.date.minute}';
+      commentsWidgets.add(Container(
+        decoration: BoxDecoration(
+            color: ColorConstant.white,
+            border: Border.symmetric(
+                horizontal: BorderSide(color: ColorConstant.lightBorderColor))),
+        child: ListTile(
+          title: Text(
+            comm.name,
+            style: TextStyle(
+                color: ColorConstant.grayColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 14),
+          ),
+          subtitle: Text(
+            comm.description,
+            style: TextStyle(color: ColorConstant.grayColor, fontSize: 14),
+          ),
+          leading: Iconify(
+            Mdi.account_circle,
+            color: ColorConstant.grayColor,
+            size: 60,
+          ),
+          trailing: Column(
+            children: [
+              Text(
+                '$date $time',
+                style: TextStyle(color: ColorConstant.grayColor, fontSize: 12),
+              ),
+              SizedBox(width: 75, child: _buildStars(comm.score)),
+            ],
+          ),
         ),
       ));
     }
     loading = false;
   }
 
-  Widget _buildScore(int score) {
-    Row rowStars = Row();
-    List<Iconify> listStars = [];
-    int rest = score;
+  Widget _buildStars(int score) {
+    List<Widget> listStars = [];
     for (var i = 0; i < score; i++) {
       listStars.add(Iconify(
         Mdi.star,
         color: ColorConstant.scoreColor,
+        size: 15,
       ));
     }
     while (score < 5) {
+      score++;
       listStars.add(Iconify(
         Mdi.star_outline,
         color: ColorConstant.scoreColor,
+        size: 13,
       ));
     }
     return Row(
@@ -72,14 +112,14 @@ class _CommentsSectionState extends State<CommentsSection> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
-              "Comentarios(${commentsWidgets.length})",
+              "Comentarios(${comments.length})",
               style: TextStyle(
                   color: ColorConstant.grayColor, fontWeight: FontWeight.bold),
             ),
           ),
           loading
               ? const Center(child: CircularProgressIndicator())
-              : commentsWidgets.isEmpty
+              : comments.isEmpty
                   ? Column(
                       children: [
                         Padding(

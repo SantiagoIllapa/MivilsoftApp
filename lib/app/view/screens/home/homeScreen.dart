@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
             backgroundColor: ColorConstant.backgroundColor,
             resizeToAvoidBottomInset: false,
             key: _scaffoldKey,
-            drawer: MainMenu(),
+            drawer: const MainMenu(),
             body: Consumer<HomeController>(
               builder: (_, controller, __) => Stack(children: [
                 createMap(controller),

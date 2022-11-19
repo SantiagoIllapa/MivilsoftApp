@@ -14,3 +14,7 @@ class ColorConstant {
   static Color scoreColor = const Color(0xFFF2BD01);
   static Color heartColor = const Color(0xFFD22809);
 }
+
+class AppConstant {
+  static String apiKeyPlace = "AIzaSyBf1u_kd9m3cIEEIrv8wNtYIz42I1ewoW0";
+}

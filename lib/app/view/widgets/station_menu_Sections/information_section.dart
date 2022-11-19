@@ -16,7 +16,7 @@ class _InformationSectionState extends State<InformationSection> {
   late bool loading;
   @override
   void initState() {
-    loading = true;
+    loading = false;
 
     super.initState();
   }

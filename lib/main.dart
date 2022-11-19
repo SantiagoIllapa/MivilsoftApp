@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LocationController());
     return GetMaterialApp(
       title: 'MivilCharge',
       theme: ThemeData(
