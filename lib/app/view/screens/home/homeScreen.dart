@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
           myLocationEnabled: false,
           myLocationButtonEnabled: false,
           markers: controller.markers,
-          mapToolbarEnabled: false,
+          mapToolbarEnabled: true,
           onTap: controller.onTap);
     }
 
