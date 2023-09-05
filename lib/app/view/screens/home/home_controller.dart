@@ -16,10 +16,10 @@ class HomeController extends ChangeNotifier {
 
   var mapType = MapType.satellite;
 
-  GoogleMapController? _mapController;
-  void onMapCreated(GoogleMapController controller) {
-    _mapController = controller;
-  }
+  // GoogleMapController? _mapController;
+  // void onMapCreated(GoogleMapController controller) {
+  //   _mapController = controller;
+  // }
 
   void onTap(LatLng position) {
     final markerId = MarkerId(_markers.length.toString());

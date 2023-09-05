@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget createMap(HomeController controller) {
       return GoogleMap(
-          onMapCreated: controller.onMapCreated,
+          // onMapCreated: controller.onMapCreated,
           initialCameraPosition: controller.initialCameraPos,
           zoomControlsEnabled: false,
           compassEnabled: false,
